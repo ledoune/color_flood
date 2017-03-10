@@ -2,12 +2,12 @@ CC	= gcc
 
 RM	= rm -f
 
-CFLAGS	= -Wall -Wextra -ansi
+CFLAGS	= -Wall -Wextra -ansi 
 LIB	=
 
 NAME	= color_flood
 
-SRCS	= src/main.c
+SRCS	= $(wildcard *.c)
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -15,7 +15,10 @@ OBJS	= $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME) $(LIB)
+	$(CC) -o $@ $^ $(LIB)
+
+%.o : %.c
+	$(CC) -o $@ -c $< $(CFLAGS)
 
 clean:
 	$(RM) $(OBJS)
