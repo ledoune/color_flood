@@ -13,5 +13,8 @@ typedef struct t_grid {
 grid *gridInit(int size);
 void gridInitColors(grid *g, RGB *cTab, int cNb);
 void gridFree(grid *g);
+/*
+ * TODO : gridSetColors(grid *g, RGB newColor, coord);
+ */ 
 
 #endif

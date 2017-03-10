@@ -14,7 +14,7 @@ grid *gridInit(int size) {
 void gridInitColors(grid *g, RGB *cTab, int cNb) {
 	int i;
 	for (i=0; i<(g->size * g->size); i++) {
-		g->rgbGrid[i] = cTab[rand() * (cNb - 1) / RAND_MAX];
+		g->rgbGrid[i] = cTab[rand() % (cNb - 1)];
 	}
 }
 

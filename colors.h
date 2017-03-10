@@ -5,13 +5,16 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 typedef struct t_RGB {
-	char R;
-	char G;
-	char B;
+	unsigned char R;
+	unsigned char G;
+	unsigned char B;
 } RGB;
 
+void rgbPrint(RGB c);
+void rgbArrayPrint(RGB *tab, int size);
 RGB rgbGenRand();
 RGB* rgbArrayGenRand(int nb);
 bool rgbEqual(RGB c1, RGB c2);

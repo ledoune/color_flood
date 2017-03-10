@@ -1,11 +1,22 @@
 #include "colors.h"
 
 
+void rgbPrint(RGB c) {
+	printf("R: %d; G: %d; B: %d;\n",c.R,c.G,c.B);
+}
+
+void rgbArrayPrint(RGB *tab, int size) {
+	int i;
+	for(i=0; i<size; i++) {
+		rgbPrint(tab[i]);
+	}
+}
+
 RGB rgbGenRand() {
 	RGB c = {
-		.R = rand() * 255 / RAND_MAX,
-		.G = rand() * 255 / RAND_MAX, 
-		.B = rand() * 255 / RAND_MAX,
+		.R = rand() % 256,
+		.G = rand() % 256, 
+		.B = rand() % 256,
 	};
 	return c;
 }
