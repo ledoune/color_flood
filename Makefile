@@ -2,7 +2,7 @@ CC	= gcc
 
 RM	= rm -f
 
-CFLAGS	= -Wall -Wextra -ansi 
+CFLAGS	= -Wall -Wextra -ansi -pedantic -std=c11
 LIB	=
 
 NAME	= color_flood

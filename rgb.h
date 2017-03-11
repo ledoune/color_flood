@@ -1,5 +1,5 @@
-#ifndef COLORS_H
-#define COLORS_H
+#ifndef RGB_H
+#define RGB_H
 
 #include <assert.h>
 #include <stdbool.h>
@@ -20,5 +20,6 @@ RGB* rgbArrayGenRand(int nb);
 bool rgbEqual(RGB c1, RGB c2);
 int rgbColorToInt(RGB c, RGB* tab, int size);
 void rgbArrayFree(RGB *tab);
+bool rgbArrayHasDuplicate(RGB *tab, int size);
 
 #endif

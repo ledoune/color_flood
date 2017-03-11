@@ -1,22 +1,20 @@
-#include "colors.h"
-#include "grid.h"
-#include <stdio.h>
-#include <assert.h>
+#include "game.h"
 
-int main(void) {
-	srand(time(NULL));
-	printf("%d\n",rand() % 255);
-	grid* g = gridInit(10);
-	RGB *cTab = rgbArrayGenRand(6);
-	rgbArrayPrint(cTab, 6);
-	gridInitColors(g, cTab, 6);
-	int i;
-	for(i=0; i < (g->size * g->size); i++) {
-		printf("%d : %d\n",i,rgbColorToInt(g->rgbGrid[i], cTab, 6));
+int main(int argc, char *argv[]) {
+	if(argc != 3) {
+		printf("Usage : %s board_size num_colors\n",argv[0]);
+		exit(1);
 	}
-	assert(rgbEqual(cTab[0],cTab[0]) && !rgbEqual(cTab[1],cTab[0]));
-	gridFree(g);
-	free(cTab);
+	srand(time(NULL));
+	int board_size = atoi(argv[1]), num_colors = atoi(argv[2]);
+
+	game *game = gameInit(board_size, num_colors);
+	while(!gameOver(game)) {
+		gamePrint(game);
+		gamePlayTurn(game);
+	}
+	printf("YOU WON, CONGRATZ\n");
+	free(game);
 
 	return 0;
 }

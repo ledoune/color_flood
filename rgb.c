@@ -1,13 +1,14 @@
-#include "colors.h"
+#include "rgb.h"
 
 
 void rgbPrint(RGB c) {
-	printf("R: %d; G: %d; B: %d;\n",c.R,c.G,c.B);
+	printf("%02x%02x%02x\n",c.R,c.G,c.B);
 }
 
 void rgbArrayPrint(RGB *tab, int size) {
 	int i;
 	for(i=0; i<size; i++) {
+		printf("%d : ",i);
 		rgbPrint(tab[i]);
 	}
 }
@@ -23,11 +24,25 @@ RGB rgbGenRand() {
 
 RGB* rgbArrayGenRand(int nb) {
 	RGB* tab = (RGB *)malloc(sizeof(RGB)*nb);
+	if(!tab) exit(1);
 	int i;
 	for (i=0; i<nb; i++) {
 		tab[i]=rgbGenRand();
 	}
 	return tab;
+}
+
+bool rgbArrayHasDuplicate(RGB *tab, int size) {
+	bool res = false;
+	int i,j;
+	for(i=0; i<size-1; i++) {
+		for(j=i+1; j<size; j++) {
+			res = rgbEqual(tab[i],tab[j]);
+			if(res) break;
+		}
+		if(res) break;
+	}
+	return res;
 }
 
 bool rgbEqual(RGB c1, RGB c2) {
