@@ -23,5 +23,6 @@ void gamePlayTurn(game *g);
 bool gameOver(game *);
 void gameExport(game *g);
 game *gameImport(char *file);
+void gameExport(game *g);
 
 #endif

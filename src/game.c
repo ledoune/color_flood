@@ -64,8 +64,9 @@ game *gameImport(char *save) {
 	char buffer[256];
 	int size, colors;
 
-	FILE *fp = fopen(save,"ab+");
+	FILE *fp = fopen(save,"r");
 	if(fp == NULL) {
+		printf("save not found\n");
 		exit(1);
 	}
 
@@ -96,4 +97,21 @@ game *gameImport(char *save) {
 	fclose(fp);
 
 	return g;
+}
+
+void gameExport(game *g) {
+
+	char name[100];
+	/* generate name from date */
+	sprintf(name, "save_%ju.data",time(NULL));
+	FILE *fp = fopen(name,"ab+");
+	if(fp == NULL) exit(1);
+
+	fprintf(fp, "%d %d\n", g->size, g->cNb);
+
+	rgbExport(fp, g->cTab, g->cNb);
+	gridExport(fp, g->grid, g->cTab, g->cNb);
+
+	fclose(fp);
+
 }

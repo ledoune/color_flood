@@ -36,13 +36,16 @@ grid *gridImport(FILE *fp, int board_size, RGB *cTab, int cNb) {
 		/* reset index and line pointer */
 		pnext = buffer - 1;
 		j = 0;
+		/* line parsing */
 		do {
 			do pnext++; while(*pnext == ' '); /* skip spaces */
 			if(*pnext == '\0') break; /* end of string */
+
 			if(sscanf(pnext, "%d", &cIndex) != 1 || cIndex < 0 || cIndex > cNb - 1) {
 				printf("Not a valid save\n");
 				exit(1);
 			}
+
 			/*move pointer to end of word */
 			do pnext++; while (*pnext != ' ' && *pnext != '\0');
 
@@ -55,6 +58,19 @@ grid *gridImport(FILE *fp, int board_size, RGB *cTab, int cNb) {
 	g->maxLabel = gridLabelCC(g);
 
 	return g;
+}
+
+void gridExport(FILE *fp, grid *g, RGB *cTab, int cNb) {
+	int x,y;
+	for(x=0; x < g->size; x++) {
+		for(y=0; y < g->size; y++) {
+			fprintf(fp, "%s%d%s",
+					(y>0) ? " ":"",
+					rgbColorToInt(gridGetColor(g, x, y), cTab, cNb),
+					(y==g->size-1)?"\n":"");
+		}
+
+	}
 }
 
 RGB gridGetColor(grid *g, int x, int y) {

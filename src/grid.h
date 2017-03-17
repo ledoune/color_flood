@@ -16,6 +16,7 @@ typedef struct t_grid {
 
 grid *gridInit(int size);
 grid *gridImport(FILE *fp, int board_size, RGB *cTab, int cNb);
+void gridExport(FILE *fp, grid *g, RGB *cTab, int cNb);
 void gridInitColors(grid *g, RGB *cTab, int cNb);
 RGB gridGetColor(grid *g, int x, int y);
 void gridSetColor(grid *g, RGB newColor, int x, int y);

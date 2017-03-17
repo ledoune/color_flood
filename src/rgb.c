@@ -28,6 +28,13 @@ RGB* rgbImport(FILE *fp, int cNb) {
 	return cTab;
 }
 
+void rgbExport(FILE *fp, RGB *cTab, int cNb) {
+	int i;
+	for(i=0; i < cNb; i++) {
+		fprintf(fp, "%d %d %d\n", cTab[i].R, cTab[i].G, cTab[i].B);
+	}
+}
+
 void rgbPrint(RGB c) {
 	printf("%02x%02x%02x\n",c.R,c.G,c.B);
 }
