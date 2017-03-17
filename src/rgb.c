@@ -1,6 +1,33 @@
 #include "rgb.h"
 
 
+RGB rgbNew(int R, int G, int B) {
+	RGB c = {
+		.R = R % 256,
+		.G = G % 256,
+		.B = B % 256,
+	};
+	return c;
+}
+
+RGB* rgbImport(FILE *fp, int cNb) {
+
+	char buffer[256];
+	RGB *cTab = (RGB *)malloc(sizeof(RGB) * cNb);
+	int R, G, B;
+
+	int i;
+	for(i=0; i < cNb; i++) {
+		fgets(buffer, sizeof(buffer), fp);
+		if(sscanf(buffer, "%d %d %d", &R, &G, &B) != 3) {
+			printf("Not a valid save file\n");
+			exit(1);
+		}
+		cTab[i] = rgbNew(R,G,B);
+	}
+	return cTab;
+}
+
 void rgbPrint(RGB c) {
 	printf("%02x%02x%02x\n",c.R,c.G,c.B);
 }

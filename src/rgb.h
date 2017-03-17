@@ -13,6 +13,8 @@ typedef struct t_RGB {
 	unsigned char B;
 } RGB;
 
+RGB rgbNew(int R, int G, int B);
+RGB* rgbImport(FILE *fp, int cNb);
 void rgbPrint(RGB c);
 void rgbArrayPrint(RGB *tab, int size);
 RGB rgbGenRand();

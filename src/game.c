@@ -11,7 +11,7 @@ game *gameInit(int size, int cNb) {
 	g->grid = gridInit(size);
 	gridInitColors(g->grid, g->cTab, cNb);
 	g->cPlayer = gridGetColor(g->grid, 0, 0);
-	return(g);
+	return g ;
 }
 
 void gamePrint(game *g) {
@@ -56,5 +56,44 @@ void gamePlayTurn(game *g) {
 }
 
 bool gameOver(game *g) {
-	return(gridIsUniform(g->grid));
+	return gridIsUniform(g->grid);
+}
+
+game *gameImport(char *save) {
+
+	char buffer[256];
+	int size, colors;
+
+	FILE *fp = fopen(save,"ab+");
+	if(fp == NULL) {
+		exit(1);
+	}
+
+	/* FILE FORMAT :
+	 * grid_size cNb
+	 * R G B (cNb lines)
+	 * 11 12 13 ....
+	 * 21 22 23 ....
+	 * .............
+	 */
+
+	fgets(buffer, sizeof(buffer), fp);
+	if(sscanf(buffer, "%d %d", &size, &colors) != 2) {
+		printf("Not a valid save file\n");
+		exit(1);
+	}
+
+	if(size < 2 || colors < 2) exit(1);
+	game *g = (game *)calloc(1, sizeof(game));
+	if(!g) exit(1);
+	g->size = size;
+	g->cNb = colors;
+	g->turnCount = 0;
+	g->cTab = rgbImport(fp, colors);
+	g->grid = gridImport(fp, size, g->cTab, colors);
+	g->cPlayer = gridGetColor(g->grid, 0, 0);
+
+	fclose(fp);
+
+	return g;
 }

@@ -23,6 +23,40 @@ void gridInitColors(grid *g, RGB *cTab, int cNb) {
 	g->maxLabel = gridLabelCC(g);
 }
 
+grid *gridImport(FILE *fp, int board_size, RGB *cTab, int cNb) {
+
+	char buffer[256];
+	char *pnext;
+	grid *g = gridInit(board_size);
+	int cIndex;
+	int i, j;
+
+	for(i=0; i<board_size; i++) {
+		fgets(buffer, sizeof(buffer), fp);
+		/* reset index and line pointer */
+		pnext = buffer - 1;
+		j = 0;
+		do {
+			do pnext++; while(*pnext == ' '); /* skip spaces */
+			if(*pnext == '\0') break; /* end of string */
+			if(sscanf(pnext, "%d", &cIndex) != 1 || cIndex < 0 || cIndex > cNb - 1) {
+				printf("Not a valid save\n");
+				exit(1);
+			}
+			/*move pointer to end of word */
+			do pnext++; while (*pnext != ' ' && *pnext != '\0');
+
+			gridSetColor(g, cTab[cIndex], i, j);
+			j++;
+
+		} while(*pnext != '\0');
+	}
+
+	g->maxLabel = gridLabelCC(g);
+
+	return g;
+}
+
 RGB gridGetColor(grid *g, int x, int y) {
 	assert(x > -1 && y > -1 && x < g->size && y < g->size);
 	return(g->rgbGrid[x * g->size + y]);

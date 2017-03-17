@@ -8,13 +8,21 @@ int main(int argc, char *argv[]) {
 	srand(time(NULL));
 	int board_size = atoi(argv[1]), num_colors = atoi(argv[2]);
 
-	game *game = gameInit(board_size, num_colors);
-	while(!gameOver(game)) {
-		gamePrint(game);
-		gamePlayTurn(game);
+	game *g = gameInit(board_size, num_colors);
+
+	/*
+	while(!gameOver(g)) {
+		gamePrint(g);
+		gamePlayTurn(g);
 	}
+
 	printf("YOU WON, CONGRATZ\n");
-	gameFree(game);
+	*/
+	game *test = gameImport("test.data");
+	gamePrint(test);
+
+	gameFree(g);
+	gameFree(test);
 
 	return 0;
 }
