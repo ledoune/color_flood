@@ -15,6 +15,7 @@ grid *gridInit(int size) {
 
 
 void gridInitColors(grid *g, RGB *cTab, int cNb) {
+	assert(cNb > 0);
 	int i;
 	for (i=0; i<(g->size * g->size); i++) {
 		g->rgbGrid[i] = cTab[rand() % cNb];
@@ -23,19 +24,23 @@ void gridInitColors(grid *g, RGB *cTab, int cNb) {
 }
 
 RGB gridGetColor(grid *g, int x, int y) {
+	assert(x > -1 && y > -1 && x < g->size && y < g->size);
 	return(g->rgbGrid[x * g->size + y]);
 }
 
 void gridSetColor(grid *g, RGB newColor, int x, int y) {
+	assert(x > -1 && y > -1 && x < g->size && y < g->size);
 	g->rgbGrid[x * g->size + y] = newColor;
 }
 
 int gridGetLabel(grid *g, int x, int y) {
+	assert(x > -1 && y > -1 && x < g->size && y < g->size);
 	return(g->ccGrid[x * g->size + y]);
 }
 
 void gridSetLabel(grid *g, int newLabel, int x, int y) {
-	g->ccGrid[x * g->size + y] = newLabel;	
+	assert(x > -1 && y > -1 && x < g->size && y < g->size);
+	g->ccGrid[x * g->size + y] = newLabel;
 }
 
 int gridGetMaxLabel(grid *g) {
@@ -47,7 +52,7 @@ bool gridIsUniform(grid *g) {
 	int i = 1;
 	while(res && i < (g->size * g->size)) {
 		res = rgbEqual(g->rgbGrid[i-1],g->rgbGrid[i]);
-		i++;		
+		i++;
 	}
 	return res;
 }
@@ -61,9 +66,9 @@ bool gridIsUniform(grid *g) {
  *		lbl = (lbl && possLbl) ? MIN(lbl,possLbl) : MAX(lbl,possLbl);
  *	}
  *	if (x<g->size-1 && rgbEqual(gridGetColor(g, x+1, y),curCell)) {
- *		possLbl = gridGetLabel(g, x+1, y);  
+ *		possLbl = gridGetLabel(g, x+1, y);
  *		lbl = (lbl && possLbl) ? MIN(lbl,possLbl) : MAX(lbl,possLbl);
- *	}	
+ *	}
  *	if (y>0 &&rgbEqual(gridGetColor(g, x, y-1),curCell)) {
  *		possLbl = gridGetLabel(g, x, y-1);
  *		lbl = (lbl && possLbl) ? MIN(lbl,possLbl) : MAX(lbl,possLbl);
@@ -81,10 +86,10 @@ bool gridIsUniform(grid *g) {
  *	* double parcours pour eviter :
  *	 * rgb 		lbl
  *	 * 1 1 1 2	1 1 1 2
- *	 * 1 1 1 2  ->	1 1 1 2 
+ *	 * 1 1 1 2  ->	1 1 1 2
  *	 * 3 3 2 2	3 3 4 2
- *	 * NB : on pourrait regarder seulement les voisins haut et gauche dans le sens 
- *	 * descendant et les voisins bas et droit en remontant, mais faudrait 2 fctn 
+ *	 * NB : on pourrait regarder seulement les voisins haut et gauche dans le sens
+ *	 * descendant et les voisins bas et droit en remontant, mais faudrait 2 fctn
  *	*
  *	for(i=0; i<g->size; i++) {
  *		for(j=0; j<g->size; j++) {
@@ -112,6 +117,7 @@ bool gridIsUniform(grid *g) {
  */
 
 void gridFloodFillLabel(grid *g, int x, int y) {
+	assert(x > -1 && y > -1 && x < g->size && y < g->size);
 	int lbl = gridGetLabel(g, x, y);
 	assert(lbl);
 	RGB currColor = gridGetColor(g, x, y);
@@ -134,6 +140,7 @@ void gridFloodFillLabel(grid *g, int x, int y) {
 }
 
 void gridFloodFillColor(grid *g, int x, int y) {
+	assert(x > -1 && y > -1 && x < g->size && y < g->size);
 	RGB c = gridGetColor(g, x, y);
 	int currLbl = gridGetLabel(g, x, y);
 	if(x>0 && (gridGetLabel(g, x-1, y) == currLbl) && !rgbEqual(gridGetColor(g, x-1, y), c) ) {
@@ -171,6 +178,7 @@ int gridLabelCC(grid *g) {
 }
 
 void gridPrint(grid *g, RGB *cTab, int cNb) {
+	assert(cNb > 0);
 	int i, j;
 	for(i=0; i<g->size; i++) {
 		for(j=0; j<g->size; j++) {
@@ -192,6 +200,6 @@ void gridPrintLabels(grid *g) {
 
 void gridFree(grid *g) {
 	free(g->rgbGrid);
+	free(g->ccGrid);
 	free(g);
 }
-

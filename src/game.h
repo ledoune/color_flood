@@ -9,7 +9,7 @@
 typedef struct t_game {
 	grid *grid;
 	int size;
-	/* duplicate date, size in grid too */
+	/* duplicate data, size in grid too */
 	int cNb;
 	int turnCount;
 	RGB *cTab;
@@ -21,5 +21,7 @@ void gamePrint(game *);
 void gameFree(game *g);
 void gamePlayTurn(game *g);
 bool gameOver(game *);
+void gameExport(game *g);
+game *gameImport(char *file);
 
 #endif

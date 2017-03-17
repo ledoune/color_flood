@@ -12,7 +12,7 @@ game *gameInit(int size, int cNb) {
 	gridInitColors(g->grid, g->cTab, cNb);
 	g->cPlayer = gridGetColor(g->grid, 0, 0);
 	return(g);
-}	
+}
 
 void gamePrint(game *g) {
 	printf("Color Flood :\nSize : %2d nb_Colors : %2d\n", g->size, g->cNb);
@@ -51,7 +51,7 @@ void gamePlayTurn(game *g) {
 				g->cPlayer = g->cTab[color];
 				g->turnCount++;
 			}
-    		}
+    	}
 	}
 }
 

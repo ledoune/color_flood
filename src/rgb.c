@@ -16,13 +16,14 @@ void rgbArrayPrint(RGB *tab, int size) {
 RGB rgbGenRand() {
 	RGB c = {
 		.R = rand() % 256,
-		.G = rand() % 256, 
+		.G = rand() % 256,
 		.B = rand() % 256,
 	};
 	return c;
 }
 
 RGB* rgbArrayGenRand(int nb) {
+	assert(nb > 0);
 	RGB* tab = (RGB *)malloc(sizeof(RGB)*nb);
 	if(!tab) exit(1);
 	int i;
@@ -52,7 +53,7 @@ bool rgbEqual(RGB c1, RGB c2) {
 int rgbColorToInt(RGB c, RGB *tab, int size) {
 	int i;
 	for(i=0; i<size; i++) {
-		if (rgbEqual(c, tab[i])) break; 
+		if (rgbEqual(c, tab[i])) break;
 	}
 	return i;
 }

@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 		gamePlayTurn(game);
 	}
 	printf("YOU WON, CONGRATZ\n");
-	free(game);
+	gameFree(game);
 
 	return 0;
 }
