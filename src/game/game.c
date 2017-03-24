@@ -63,6 +63,10 @@ game *gameImport(char *save) {
 
 	char buffer[256];
 	int size, colors;
+	/* char *save_path = "saves/";
+	 * strcat(save_path, save)
+	 * FILE *fp = fopen(save_path,"r");
+	 */ 
 
 	FILE *fp = fopen(save,"r");
 	if(fp == NULL) {

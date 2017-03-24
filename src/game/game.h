@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 #include "rgb.h"
 #include "grid.h"
 
@@ -22,7 +23,7 @@ void gameFree(game *g);
 void gamePlayTurn(game *g);
 bool gameOver(game *);
 void gameExport(game *g);
-game *gameImport(char *file);
+game *gameImport(char *save);
 void gameExport(game *g);
 
 #endif

@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 			break;
 		default :
 			printf("Usage : %s board_size num_colors\n\
-			Or %s save_name\n",argv[0], argv[0]);
+			Or %s path/to/save\n",argv[0], argv[0]);
 			exit(1);
 	}
 

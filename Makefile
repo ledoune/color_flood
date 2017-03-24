@@ -5,9 +5,9 @@ RM		= rm -rf
 CFLAGS		= -Wall -Wextra -ansi -pedantic -std=c11
 LIB		=
 
-MODULES 	= 
-SRC_DIR 	= src # $(addprefix src/,$(MODULES))
-BUILD_DIR 	= build # $(addprefix build/,$(MODULES))
+MODULES 	= game # sdl
+SRC_DIR 	= $(addprefix src/,$(MODULES))
+BUILD_DIR 	= $(addprefix build/,$(MODULES))
 
 SRC		= $(foreach sdir,$(SRC_DIR),$(wildcard $(sdir)/*.c))
 OBJ		= $(patsubst src/%.c,build/%.o,$(SRC))
@@ -21,7 +21,7 @@ $1/%.o: %.c
 	$(CC) -c $$< -o $$@
 endef
 
-.PHONY: all checkdirs clean 
+.PHONY: all checkdirs clean fclean
 
 all: checkdirs $(NAME)
 
