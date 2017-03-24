@@ -73,6 +73,27 @@ void gridExport(FILE *fp, grid *g, RGB *cTab, int cNb) {
 	}
 }
 
+bool gridEqual(grid* g1, grid* g2) {
+    if (g1->size != g2->size) exit(1);
+    bool res = true;
+	int i = 0;
+	while(res && i < (g->size * g->size)) {
+		res = rgbEqual(g1->rgbGrid[i],g2->rgbGrid[i]);
+		i++;
+	}
+	return res;
+}
+
+void gridCopy(grid* g1, grid* g2) {
+    if (g1->size != g2->size) exit(1);
+    int i = 0;
+    while(i < (g->size * g->size)) {
+        g2->rgbGrid[i] = g1->rgbGrid[i]);
+        i++;
+    }
+    return res;
+}
+
 RGB gridGetColor(grid *g, int x, int y) {
 	assert(x > -1 && y > -1 && x < g->size && y < g->size);
 	return(g->rgbGrid[x * g->size + y]);
