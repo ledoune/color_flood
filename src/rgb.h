@@ -13,6 +13,7 @@ typedef struct t_RGB {
 	unsigned char B;
 } RGB;
 
+
 RGB rgbNew(int R, int G, int B);
 RGB* rgbImport(FILE *fp, int cNb);
 void rgbExport(FILE *fp, RGB* cTab, int cNb);

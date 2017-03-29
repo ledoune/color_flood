@@ -10,6 +10,7 @@ RGB rgbNew(int R, int G, int B) {
 	return c;
 }
 
+
 RGB* rgbImport(FILE *fp, int cNb) {
 
 	char buffer[256];
@@ -35,9 +36,12 @@ void rgbExport(FILE *fp, RGB *cTab, int cNb) {
 	}
 }
 
+
+
 void rgbPrint(RGB c) {
 	printf("%02x%02x%02x\n",c.R,c.G,c.B);
 }
+
 
 void rgbArrayPrint(RGB *tab, int size) {
 	int i;
@@ -47,6 +51,7 @@ void rgbArrayPrint(RGB *tab, int size) {
 	}
 }
 
+
 RGB rgbGenRand() {
 	RGB c = {
 		.R = rand() % 256,
@@ -55,7 +60,12 @@ RGB rgbGenRand() {
 	};
 	return c;
 }
-
+/**
+	 * génère un tableau de couleurs aléatoires de taille non null 
+	 *
+	 * \param  nb la taille du tableau souhaité
+	 * \return tab le tableau ssi \a nb non null
+	 */
 RGB* rgbArrayGenRand(int nb) {
 	assert(nb > 0);
 	RGB* tab = (RGB *)malloc(sizeof(RGB)*nb);
@@ -66,6 +76,8 @@ RGB* rgbArrayGenRand(int nb) {
 	}
 	return tab;
 }
+
+
 
 bool rgbArrayHasDuplicate(RGB *tab, int size) {
 	bool res = false;
@@ -84,6 +96,7 @@ bool rgbEqual(RGB c1, RGB c2) {
 	return(c1.R == c2.R && c1.G == c2.G && c1.B == c2.B);
 }
 
+
 int rgbColorToInt(RGB c, RGB *tab, int size) {
 	int i;
 	for(i=0; i<size; i++) {
@@ -91,6 +104,7 @@ int rgbColorToInt(RGB c, RGB *tab, int size) {
 	}
 	return i;
 }
+
 
 void rgbArrayFree(RGB *tab) {
 	free(tab);
