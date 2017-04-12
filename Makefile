@@ -5,7 +5,7 @@ RM		= rm -rf
 CFLAGS		= -Wall -Wextra -ansi -pedantic -std=c11
 LIB		=
 
-MODULES 	= game # sdl
+MODULES 	= game . # sdl
 SRC_DIR 	= $(addprefix src/,$(MODULES))
 BUILD_DIR 	= $(addprefix build/,$(MODULES))
 
