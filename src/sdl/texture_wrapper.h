@@ -35,16 +35,9 @@ bool LTexture_LoadFromFile(LTexture *t, const char *path);
 /* Load a text texture from the string in parameters */
 bool LTexture_LoadFromRenderedText(LTexture *texture, const char *text, SDL_Color color);
 
-/* TODO
-		Set color modulation
-		void setColor( Uint8 red, Uint8 green, Uint8 blue );
-
-		Set blending
-		void setBlendMode( SDL_BlendMode blending );
-
-		Set alpha modulation
-		void setAlpha( Uint8 alpha );
- */
+void LTexture_SetColor(LTexture *t, uint8_t red, uint8_t green, uint8_t blue);
+void LTexture_SetBlendMode(LTexture *t, SDL_BlendMode blending);
+void LTexture_SetAlpha(LTexture *t, uint8_t alpha);
 
 /* default values : *t, x, y, NULL, 0, NULL, SDL_FLIP_NONE) */	
 void LTexture_Render(LTexture *t, int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip);
