@@ -8,7 +8,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-typedef struct wrapper {
+typedef struct texture {
 	SDL_Texture *mTexture;
 	int mWidth;
 	int mHeight;
