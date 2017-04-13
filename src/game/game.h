@@ -24,6 +24,5 @@ void gamePlayTurn(game *g);
 bool gameOver(game *);
 void gameExport(game *g);
 game *gameImport(char *save);
-void gameExport(game *g);
 
 #endif
