@@ -102,6 +102,28 @@ bool LTexture_LoadFromRenderedText(LTexture* texture, const char *text, SDL_Colo
 	return texture->mTexture != NULL;
 }	
 
+bool LTexture_SetGeometryMode(LTexture *t, size_t width, size_t height) {
+	if(t->gRenderer == NULL) {
+		fprintf(stderr, "Unable to set texture as geometry target! Need to attach a renderer\n");
+	}
+	t->mTexture = SDL_CreateTexture(*(t->gRenderer), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
+	if(t->mTexture == NULL) {
+		fprintf(stderr,"Unable to create blank render target! SDL_Error : %s\n", SDL_GetError());
+	}
+	else {
+		t->mWidth = width;
+		t->mHeight = height;
+		LTexture_SetAsRenderTarget(t);
+	}
+
+	return t->mTexture != NULL;
+}
+
+void LTexture_SetAsRenderTarget(LTexture *t) {
+	/* verif gRenderer != NULL ? */
+	SDL_SetRenderTarget(*(t->gRenderer),t->mTexture);
+}
+
 void LTexture_SetColor(LTexture *t, uint8_t red, uint8_t green, uint8_t blue) {
 	SDL_SetTextureColorMod(t->mTexture, red, green, blue);
 }
@@ -134,4 +156,12 @@ size_t LTexture_GetWidth(LTexture *t) {
 
 size_t LTexture_GetHeight(LTexture *t) {
 	return t->mHeight;
+}
+
+SDL_Renderer* LTexture_GetRenderer(LTexture *t) {
+	return *(t->gRenderer);
+}
+
+SDL_Window* LTexture_GetWindow(LTexture *t) {
+	return *(t->gWindow);
 }

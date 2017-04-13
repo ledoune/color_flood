@@ -22,7 +22,7 @@ bool sdlInit(SDL_Window **gWindow, SDL_Renderer **gRenderer) {
 		}
 		else {
 			/* create renderer */
-			*gRenderer = SDL_CreateRenderer(*gWindow, -1, SDL_RENDERER_ACCELERATED);
+			*gRenderer = SDL_CreateRenderer(*gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 			if(*gRenderer == NULL) {
 				fprintf(stderr,"Renderer could not be created! SDL Error : %s\n", SDL_GetError());
 				success = false;

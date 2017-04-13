@@ -34,7 +34,11 @@ bool LTexture_LoadFont(LTexture *t, const char *path, size_t size);
 bool LTexture_LoadFromFile(LTexture *t, const char *path);
 /* Load a text texture from the string in parameters */
 bool LTexture_LoadFromRenderedText(LTexture *texture, const char *text, SDL_Color color);
+/* to render geometry to texture */
+bool LTexture_SetGeometryMode(LTexture *t, size_t width, size_t height);
+void LTexture_SetAsRenderTarget(LTexture *t);
 
+/* rendering parameters */
 void LTexture_SetColor(LTexture *t, uint8_t red, uint8_t green, uint8_t blue);
 void LTexture_SetBlendMode(LTexture *t, SDL_BlendMode blending);
 void LTexture_SetAlpha(LTexture *t, uint8_t alpha);
@@ -45,5 +49,7 @@ void LTexture_Render(LTexture *t, int x, int y, SDL_Rect* clip, double angle, SD
 /* access info */
 size_t LTexture_GetWidth(LTexture *t);
 size_t LTexture_GetHeight(LTexture *t);
+SDL_Renderer* LTexture_GetRenderer(LTexture *t);
+SDL_Window* LTexture_GetWindow(LTexture *t);
 
 #endif
