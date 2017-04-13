@@ -1,12 +1,14 @@
-#ifndef SDL_UTILS_H
-#define SDL_UTILS_H
+#ifndef _SDL_UTILS_H
+#define _SDL_UTILS_H
 
 #include <stdio.h>
 #include <stdbool.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 480
+#define SCREEN_HEIGHT 640
 #define IMG_PATH "img"
 
 enum KeyPressSurfaces
@@ -19,8 +21,8 @@ enum KeyPressSurfaces
 	KEY_PRESS_SURFACE_TOTAL
 };
 
-bool init(SDL_Window **gWindow, SDL_Surface **gScreenSurface);
-void quit(SDL_Surface **array, SDL_Window *window);
+bool sdlInit(SDL_Window **gWindow, SDL_Renderer **gRenderer);
+void sdlClose(SDL_Window **gWindow, SDL_Renderer **gRenderer);
 
 SDL_Surface* loadBMP(char *name);
 bool loadAllMedia(SDL_Surface **array);
