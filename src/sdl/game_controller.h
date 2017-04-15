@@ -1,6 +1,8 @@
 #ifndef _GAME_CONTROLLER_H
 #define _GAME_CONTROLLER_H
 
+#include "../game/game.h"
+
 typedef enum GameState {
 	GAMESTATE_MENU,
 	GAMESTATE_SETTINGS,

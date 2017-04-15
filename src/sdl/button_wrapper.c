@@ -50,9 +50,11 @@ void LButton_Render(LButton *b) {
 
 	SDL_RenderDrawRect(LTexture_GetRenderer(b->mBackground), &frame);
 	LTexture_Render(b->mBackground, b->mPosition.x, b->mPosition.y, NULL, 0, NULL, SDL_FLIP_NONE);
-	int textX = b->mPosition.x + (LTexture_GetWidth(b->mBackground) - LTexture_GetWidth(b->mText)) / 2;
-	int textY = b->mPosition.y + (LTexture_GetHeight(b->mBackground) - LTexture_GetHeight(b->mText)) / 2;
-	LTexture_Render(b->mText, textX, textY, NULL, 0, NULL, SDL_FLIP_NONE);
+	if(b->mText != NULL) {
+		int textX = b->mPosition.x + (LTexture_GetWidth(b->mBackground) - LTexture_GetWidth(b->mText)) / 2;
+		int textY = b->mPosition.y + (LTexture_GetHeight(b->mBackground) - LTexture_GetHeight(b->mText)) / 2;
+		LTexture_Render(b->mText, textX, textY, NULL, 0, NULL, SDL_FLIP_NONE);
+	}
 }
 
 void LButton_HandleEvent(LButton *b, SDL_Event *e, int *gs) {

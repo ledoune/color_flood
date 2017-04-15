@@ -61,11 +61,14 @@ void sdlClose(SDL_Window **gWindow, SDL_Renderer **gRenderer) {
 
 LButton* sdlCreateButton(SDL_Window **gWindow, SDL_Renderer **gRenderer, const char *text, TTF_Font *font, uint8_t R, uint8_t G, uint8_t B, size_t width, size_t height, int posX, int posY, void (*ptr)(int *)) {
 	
-	LTexture *t = LTexture_New();
-	LTexture_Init(t, gWindow, gRenderer);
-	LTexture_SetFont(t, font);
-	SDL_Color c = {0, 0, 0};
-	LTexture_LoadFromRenderedText(t, text, c);
+	LTexture *t = NULL;
+	if(text != NULL) {
+		t = LTexture_New();
+		LTexture_Init(t, gWindow, gRenderer);
+		LTexture_SetFont(t, font);
+		SDL_Color c = {0, 0, 0};
+		LTexture_LoadFromRenderedText(t, text, c);
+	}
 
 	LTexture *bk = LTexture_New();
 	LTexture_Init(bk, gWindow, gRenderer);
