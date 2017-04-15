@@ -13,7 +13,8 @@ enum LButtonState {
 typedef struct button {
 	/* top left position */
 	SDL_Point mPosition;
-	LTexture *mTexture;
+	LTexture *mBackground;
+	LTexture *mText;
 	/*
 	 * LTexture *mClickedTexture;
 	 * LTexture *mHoveredTexture;
@@ -28,7 +29,8 @@ void LButton_Delete(LButton *b);
 
 /* set attributes */
 void LButton_SetPosition(LButton *b, int x, int y);
-void LButton_SetLTexture(LButton *b, LTexture *t);
+void LButton_SetBackground(LButton *b, LTexture *t);
+void LButton_SetText(LButton *b, LTexture *t);
 void LButton_SetAction(LButton *b, void (*ptr)(void));
 
 /* handle mouse */
