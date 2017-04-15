@@ -25,6 +25,7 @@ void LTexture_Delete(LTexture *t);
 
 /* attach a texture to a window and renderer */
 void LTexture_Init(LTexture *t, SDL_Window **gWindow, SDL_Renderer **gRenderer);
+void LTexture_SetFont(LTexture *t, TTF_Font *font);
 /* reset mTexture, mWidth, mHeight */
 void LTexture_Clear(LTexture *t);
 
@@ -49,6 +50,7 @@ void LTexture_Render(LTexture *t, int x, int y, SDL_Rect* clip, double angle, SD
 /* access info */
 size_t LTexture_GetWidth(LTexture *t);
 size_t LTexture_GetHeight(LTexture *t);
+TTF_Font* LTexture_GetFont(LTexture *t);
 SDL_Renderer* LTexture_GetRenderer(LTexture *t);
 SDL_Window* LTexture_GetWindow(LTexture *t);
 

@@ -30,6 +30,10 @@ void LTexture_Init(LTexture *t, SDL_Window **gWindow, SDL_Renderer **gRenderer) 
 	t->gRenderer = gRenderer;
 }
 
+void LTexture_SetFont(LTexture *t, TTF_Font *font) {
+	t->font = font;
+}
+
 void LTexture_Clear(LTexture *t) {
 	if(t->mTexture != NULL) {
 		SDL_DestroyTexture(t->mTexture);
@@ -157,6 +161,10 @@ size_t LTexture_GetWidth(LTexture *t) {
 
 size_t LTexture_GetHeight(LTexture *t) {
 	return t->mHeight;
+}
+
+TTF_Font* LTexture_GetFont(LTexture *t) {
+	return t->font;
 }
 
 SDL_Renderer* LTexture_GetRenderer(LTexture *t) {

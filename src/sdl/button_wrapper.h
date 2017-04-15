@@ -1,7 +1,6 @@
 #ifndef _BUTTON_WRAPPER_H
 #define _BUTTON_WRAPPER_H
 
-#include "sdl_utils.h"
 #include "texture_wrapper.h"
 
 enum LButtonState {
@@ -20,7 +19,7 @@ typedef struct button {
 	 * LTexture *mHoveredTexture;
 	 */
 	enum LButtonState s;
-	void (*triggerPtr)(void);
+	void (*triggerPtr)(int *);
 } LButton;
 
 /* Contructor Destructor */
@@ -31,10 +30,10 @@ void LButton_Delete(LButton *b);
 void LButton_SetPosition(LButton *b, int x, int y);
 void LButton_SetBackground(LButton *b, LTexture *t);
 void LButton_SetText(LButton *b, LTexture *t);
-void LButton_SetAction(LButton *b, void (*ptr)(void));
+void LButton_SetAction(LButton *b, void (*ptr)(int *));
 
 /* handle mouse */
-void LButton_HandleEvent(LButton *b, SDL_Event *e);
+void LButton_HandleEvent(LButton *b, SDL_Event *e, int *gs);
 
 /* render button */
 void LButton_Render(LButton *b);

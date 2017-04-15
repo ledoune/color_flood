@@ -27,7 +27,7 @@ void LButton_SetText(LButton *b, LTexture *t) {
 	b->mText = t;
 }
 
-void LButton_SetAction(LButton *b, void (*ptr)(void)) {
+void LButton_SetAction(LButton *b, void (*ptr)(int *)) {
 	b->triggerPtr = ptr;
 }
 
@@ -55,7 +55,7 @@ void LButton_Render(LButton *b) {
 	LTexture_Render(b->mText, textX, textY, NULL, 0, NULL, SDL_FLIP_NONE);
 }
 
-void LButton_HandleEvent(LButton *b, SDL_Event* e) {
+void LButton_HandleEvent(LButton *b, SDL_Event *e, int *gs) {
 	if(e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP ) {
 		int x, y;
 		SDL_GetMouseState(&x, &y);
@@ -89,7 +89,7 @@ void LButton_HandleEvent(LButton *b, SDL_Event* e) {
 					break;
 
 				case SDL_MOUSEBUTTONUP:
-					(*(b->triggerPtr))();
+					(*(b->triggerPtr))(gs);
 					break;
 			}
 		}

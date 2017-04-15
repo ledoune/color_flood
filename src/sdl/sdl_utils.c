@@ -58,3 +58,39 @@ void sdlClose(SDL_Window **gWindow, SDL_Renderer **gRenderer) {
 	IMG_Quit();
 	SDL_Quit();
 }
+
+LButton* sdlCreateButton(SDL_Window **gWindow, SDL_Renderer **gRenderer, const char *text, TTF_Font *font, uint8_t R, uint8_t G, uint8_t B, size_t width, size_t height, int posX, int posY, void (*ptr)(int *)) {
+	
+	LTexture *t = LTexture_New();
+	LTexture_Init(t, gWindow, gRenderer);
+	LTexture_SetFont(t, font);
+	SDL_Color c = {0, 0, 0};
+	LTexture_LoadFromRenderedText(t, text, c);
+
+	LTexture *bk = LTexture_New();
+	LTexture_Init(bk, gWindow, gRenderer);
+	bool targetOK = true;
+	if(!LTexture_SetGeometryMode(bk, width, height)) {
+		fprintf(stderr,"Failed to create target texture for button %s!\n", text);
+		targetOK = false;
+	}
+	LTexture_SetAsRenderTarget(bk);
+
+	SDL_SetRenderDrawColor(*gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_RenderClear(*gRenderer);
+
+	SDL_Rect background = {0, 0, width, height};
+	SDL_SetRenderDrawColor(*gRenderer, R, G, B, 0xFF);
+	SDL_RenderFillRect(*gRenderer, &background);
+
+	SDL_SetRenderTarget(*gRenderer, NULL);
+
+
+	LButton *b = LButton_New();
+	LButton_SetPosition(b, posX, posY);
+	LButton_SetText(b, t);
+	LButton_SetBackground(b, bk);
+	LButton_SetAction(b, ptr);
+
+	return b;
+}

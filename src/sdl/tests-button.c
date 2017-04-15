@@ -1,7 +1,9 @@
-#include "button_wrapper.h"
+#include "sdl_utils.h"
+#include "game_controller.h"
 
-void test_trigger(void) {
-	printf("button!\n");
+void test_trigger(int *i) {
+	(*i)++;
+	printf("button %d!\n",*i);
 }
 
 int main(int argc, char *argv[]) {
@@ -24,8 +26,8 @@ int main(int argc, char *argv[]) {
 		LTexture *bk = LTexture_New();
 		LTexture_Init(bk, &gWindow, &gRenderer);
 		bool targetOK = true;
-		if(!LTexture_SetGeometryMode(bk, LTexture_GetWidth(t) + 20, LTexture_GetHeight(t)) + 20) {
-			fprintf(stderr,"Failed to create target texture!\n");
+		if(!LTexture_SetGeometryMode(bk, LTexture_GetWidth(t) + 20, LTexture_GetHeight(t) + 20)) {
+			fprintf(stderr,"Failed to create target texture for button 1!\n");
 			targetOK = false;
 		}
 		LTexture_SetAsRenderTarget(bk);
@@ -49,6 +51,12 @@ int main(int argc, char *argv[]) {
 		LButton_SetBackground(b, bk);
 		LButton_SetAction(b, &test_trigger);
 
+		TTF_Font *lazy = TTF_OpenFont("./lazy.ttf", 20);
+		LButton *b2 = sdlCreateButton(&gWindow, &gRenderer, "Test button", lazy, 0xFF, 0xF8, 0xDC, SCREEN_WIDTH, 50, 0, 0, &test_trigger);
+
+		int count1=0, count2=0;
+		GameState gs = GAMESTATE_MENU;
+
 		while(!quit) {
 			SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 			SDL_RenderClear(gRenderer);
@@ -58,11 +66,13 @@ int main(int argc, char *argv[]) {
 					quit = true;
 				}
 				else {
-					LButton_HandleEvent(b, &e);
+					LButton_HandleEvent(b, &e, (int *)&gs);
+					LButton_HandleEvent(b2, &e, &count2);
 				}
 			}
 
 			LButton_Render(b);
+			LButton_Render(b2);
 
 			SDL_RenderPresent(gRenderer);
 		}
