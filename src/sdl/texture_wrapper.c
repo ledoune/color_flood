@@ -14,6 +14,7 @@ LTexture* LTexture_New(void) {
 }
 
 void LTexture_Delete(LTexture *t) {
+	if(t == NULL) return;
 	LTexture_Clear(t);
 	if(t->font != NULL) {
 		TTF_CloseFont(t->font);
