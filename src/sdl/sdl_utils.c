@@ -15,7 +15,7 @@ bool sdlInit(SDL_Window **gWindow, SDL_Renderer **gRenderer) {
 		}
 
 		/* create window */
-		*gWindow = SDL_CreateWindow("Coucou la fenetre", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		*gWindow = SDL_CreateWindow("Coucou la fenêtre", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if(*gWindow == NULL) {
 			fprintf(stderr,"Window could not be created! SDL Error : %s\n", SDL_GetError());
 			success = false;

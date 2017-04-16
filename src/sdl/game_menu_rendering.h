@@ -2,7 +2,7 @@
 #define _GAME_MENU_RENDERING
 
 #include "sdl_utils.h"
-#include "game_controller.h"
+#include "game_states.h"
 
 #define MENU_BUTTONS_COUNT 4
 
@@ -12,6 +12,8 @@ void menuInitButtons(SDL_Window **gWindow, SDL_Renderer **gRenderer, LButton *me
 void menuHandleEvents(LButton *menuButtons[], SDL_Event *e, GameState *gs);
 /* renders the menu */
 void menuRender(LButton *menuButtons[]);
+/* routine for controller */
+GameState menuRoutine(SDL_Window **gWindow, SDL_Renderer **gRenderer, SDL_Event *e, GameState *gs);
 
 /* actions triggered by pressing the buttons */
 void menuPlayAction(GameState *gs);

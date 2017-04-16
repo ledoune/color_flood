@@ -15,7 +15,7 @@ void menuInitButtons(SDL_Window **gWindow, SDL_Renderer **gRenderer, LButton *me
 								 SCREEN_WIDTH,
 								 fontSize + 25,
 								 0,
-								 SCREEN_HEIGHT * 1/5 - (fontSize + 25),
+								 SCREEN_HEIGHT * 1/5 - (fontSize + 25) / 2,
 								 (void (*)(int *))menuPlayAction);
 
 	menuButtons[1] = sdlCreateButton(gWindow,
@@ -28,7 +28,7 @@ void menuInitButtons(SDL_Window **gWindow, SDL_Renderer **gRenderer, LButton *me
 								 SCREEN_WIDTH,
 								 fontSize + 25,
 								 0,
-								 SCREEN_HEIGHT * 2/5 - (fontSize + 25),
+								 SCREEN_HEIGHT * 2/5 - (fontSize + 25) / 2,
 								 (void (*)(int *))menuLoadAction);
 	
 	menuButtons[2] = sdlCreateButton(gWindow,
@@ -41,7 +41,7 @@ void menuInitButtons(SDL_Window **gWindow, SDL_Renderer **gRenderer, LButton *me
 								 SCREEN_WIDTH,
 								 fontSize + 25,
 								 0,
-								 SCREEN_HEIGHT * 3/5 - (fontSize + 25),
+								 SCREEN_HEIGHT * 3/5 - (fontSize + 25) / 2,
 								 (void (*)(int *))menuSettingsAction);
 	
 	menuButtons[3] = sdlCreateButton(gWindow,
@@ -54,7 +54,7 @@ void menuInitButtons(SDL_Window **gWindow, SDL_Renderer **gRenderer, LButton *me
 								 SCREEN_WIDTH,
 								 fontSize + 25,
 								 0,
-								 SCREEN_HEIGHT * 4/5 - (fontSize + 25),
+								 SCREEN_HEIGHT * 4/5 - (fontSize + 25) / 2,
 								 (void (*)(int *))menuQuitAction);
 	
 }
@@ -71,6 +71,36 @@ void menuRender(LButton *menuButtons[]) {
 	for(i=0; i<MENU_BUTTONS_COUNT; i++) {
 		LButton_Render(menuButtons[i]);
 	}
+}
+
+GameState menuRoutine(SDL_Window **gWindow, SDL_Renderer **gRenderer, SDL_Event *e, GameState *gs) {
+	LButton *menuButtons[MENU_BUTTONS_COUNT];
+	menuInitButtons(gWindow, gRenderer, menuButtons);
+
+	while((*gs) == GAMESTATE_MENU) {
+		SDL_SetRenderDrawColor(*gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+		SDL_RenderClear(*gRenderer);
+
+		while(SDL_PollEvent(e) != 0) {
+			if(e->type == SDL_QUIT) {
+				*gs = GAMESTATE_QUIT;
+			}
+			else {
+				menuHandleEvents(menuButtons, e, gs);
+			}
+		}
+		
+		menuRender(menuButtons);
+
+		SDL_RenderPresent(*gRenderer);
+	}
+	int i;
+	for(i=0; i<MENU_BUTTONS_COUNT; i++) {
+		LButton_Delete(menuButtons[i]);
+		menuButtons[i] = NULL;
+	}
+
+	return *gs;
 }
 
 

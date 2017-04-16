@@ -4,13 +4,15 @@ int main(int argc, char *argv[]) {
 	SDL_Window *gWindow = NULL;
 	SDL_Renderer *gRenderer = NULL;
 
+	srand(time(NULL));
+
 	if(!sdlInit(&gWindow, &gRenderer)) {
 		fprintf(stderr, "Failed to initialize!\n");
 	}
 	else {
 		game *g = NULL;
 		g = gameInit(10,5);
-		int playerColor = 0;
+		int playerColor = -1;
 		/* TODO : change game struct to work more with integers and less with RGB */
 
 		SDL_Event e;
@@ -30,9 +32,10 @@ int main(int argc, char *argv[]) {
 				}
 			}
 
-			printf("%d\n", playerColor);
+			gamePlayTurnSDL(g, playerColor);
 
 			boardRenderButtons(boardButtons, g->cNb);
+			boardRenderBoard(g, &gRenderer);
 
 			SDL_RenderPresent(gRenderer);
 
