@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 #include "rgb.h"
 #include "grid.h"
 
@@ -17,12 +18,12 @@ typedef struct t_game {
 } game;
 
 game *gameInit(int size, int cNb);
-void gamePrint(game *);
+void gamePrint(game *g);
 void gameFree(game *g);
 void gamePlayTurn(game *g);
+void gamePlayTurnSDL(game *g, int newColor);
 bool gameOver(game *);
 void gameExport(game *g);
-game *gameImport(char *file);
-void gameExport(game *g);
+game *gameImport(char *save);
 
 #endif

@@ -2,12 +2,12 @@ CC		= gcc
 
 RM		= rm -rf
 
-CFLAGS		= -Wall -Wextra -ansi -pedantic -std=c11
-LIB		=
+CFLAGS		= -Wall -Wextra -ansi -pedantic -std=c11 -O3
+LIB		= -lSDL2 -lSDL2_image -lSDL2_ttf
 
-MODULES 	= 
-SRC_DIR 	= src # $(addprefix src/,$(MODULES))
-BUILD_DIR 	= build # $(addprefix build/,$(MODULES))
+MODULES 	= game sdl
+SRC_DIR 	= $(addprefix src/,$(MODULES))
+BUILD_DIR 	= $(addprefix build/,$(MODULES))
 
 SRC		= $(foreach sdir,$(SRC_DIR),$(wildcard $(sdir)/*.c))
 OBJ		= $(patsubst src/%.c,build/%.o,$(SRC))
@@ -18,10 +18,10 @@ VPATH 		= %.c $(SRC_DIR)
 
 define make-goal
 $1/%.o: %.c
-	$(CC) -c $$< -o $$@
+	$(CC) $(CFLAGS) -c $$< -o $$@
 endef
 
-.PHONY: all checkdirs clean 
+.PHONY: all checkdirs clean fclean
 
 all: checkdirs $(NAME)
 

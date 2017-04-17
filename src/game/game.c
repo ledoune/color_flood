@@ -55,6 +55,17 @@ void gamePlayTurn(game *g) {
 	}
 }
 
+void gamePlayTurnSDL(game *g, int newColor) {
+	if(!(newColor < 0 || newColor > g->cNb-1 || rgbEqual(g->cPlayer, g->cTab[newColor]))) {
+		gridSetColor(g->grid, g->cTab[newColor], 0, 0);
+		gridFloodFillColor(g->grid, 0, 0);
+		gridSetLabel(g->grid, gridGetMaxLabel(g->grid) + g->turnCount, 0, 0);
+		gridFloodFillLabel(g->grid, 0, 0);
+		g->cPlayer = g->cTab[newColor];
+		g->turnCount++;
+	}	
+}
+
 bool gameOver(game *g) {
 	return gridIsUniform(g->grid);
 }
@@ -63,6 +74,10 @@ game *gameImport(char *save) {
 
 	char buffer[256];
 	int size, colors;
+	/* char *save_path = "saves/";
+	 * strcat(save_path, save)
+	 * FILE *fp = fopen(save_path,"r");
+	 */ 
 
 	FILE *fp = fopen(save,"r");
 	if(fp == NULL) {
