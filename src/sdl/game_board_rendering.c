@@ -7,7 +7,7 @@ sdlBoard* boardInit(game *g, SDL_Window **gWindow, SDL_Renderer **gRenderer) {
 	newBoard->gRenderer = gRenderer;
 	newBoard->g = g;
 	newBoard->boardButtons = boardInitButtons(newBoard);
-	newBoard->bannerFont = TTF_OpenFont("./CaviarDreams.ttf", 20);
+	newBoard->bannerFont = TTF_OpenFont("./src/sdl/fonts/CaviarDreams.ttf", 20);
 	newBoard->gs = GAMESTATE_PLAYING;
 
 	boardInitBanner(newBoard);

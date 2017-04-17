@@ -3,9 +3,9 @@ CC		= gcc
 RM		= rm -rf
 
 CFLAGS		= -Wall -Wextra -ansi -pedantic -std=c11
-LIB		=
+LIB		= -lSDL2 -lSDL2_image -lSDL2_ttf
 
-MODULES 	= game  # sdl
+MODULES 	= game sdl
 SRC_DIR 	= $(addprefix src/,$(MODULES))
 BUILD_DIR 	= $(addprefix build/,$(MODULES))
 

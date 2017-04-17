@@ -8,7 +8,7 @@ menu* menuInit(SDL_Window **gWindow, SDL_Renderer **gRenderer) {
 	newMenu->gWindow = gWindow;
 	newMenu->gRenderer = gRenderer;
 	newMenu->fontSize = 40;
-	newMenu->menuFont = TTF_OpenFont("./CaviarDreams.ttf", newMenu->fontSize);
+	newMenu->menuFont = TTF_OpenFont("./src/sdl/fonts/CaviarDreams.ttf", newMenu->fontSize);
 
 	menuInitButtons(newMenu);
 	menuInitBanner(newMenu);
