@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
 	SDL_Window *gWindow = NULL;
 	SDL_Renderer *gRenderer = NULL;
 	/* default settings for a game */
-	int boardSize = 25, cNb = 13;
+	int boardSize = 12, cNb = 6;
 	game *g = NULL;
 
 	srand(time(NULL));

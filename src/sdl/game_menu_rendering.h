@@ -6,12 +6,29 @@
 
 #define MENU_BUTTONS_COUNT 4
 
-/* creates Play, Load, Settings, Quit buttons */
-void menuInitButtons(SDL_Window **gWindow, SDL_Renderer **gRenderer, LButton *menuButtons[MENU_BUTTONS_COUNT]);
+typedef struct menu {
+	TTF_Font *menuFont;
+	size_t fontSize;
+	LTexture *bannerText;
+	LTexture *bannerBackground;
+	LButton *menuButtons[MENU_BUTTONS_COUNT];
+	SDL_Window **gWindow;
+	SDL_Renderer **gRenderer;
+} menu;
+
+/* creates Play, Load, Settings, Quit buttons and banner */
+menu *menuInit(SDL_Window **gWindow, SDL_Renderer **gRenderer);
+void menuInitButtons(menu *m);
+void menuInitBanner(menu *m);
+void menuDelete(menu *m);
+
 /* handle evends for the 4 buttons */
-void menuHandleEvents(LButton *menuButtons[], SDL_Event *e, GameState *gs);
+void menuHandleEvents(menu *m, SDL_Event *e, GameState *gs);
+
 /* renders the menu */
-void menuRender(LButton *menuButtons[]);
+void menuRender(menu *m);
+void menuBannerRender(menu *m);
+
 /* routine for controller */
 GameState menuRoutine(SDL_Window **gWindow, SDL_Renderer **gRenderer, SDL_Event *e, GameState *gs);
 

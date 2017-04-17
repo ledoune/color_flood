@@ -1,83 +1,140 @@
 #include "game_menu_rendering.h"
 
+menu* menuInit(SDL_Window **gWindow, SDL_Renderer **gRenderer) {
+	menu *newMenu = (menu *)calloc(1, sizeof(menu));
 
-void menuInitButtons(SDL_Window **gWindow, SDL_Renderer **gRenderer, LButton *menuButtons[MENU_BUTTONS_COUNT]) {
-	int i;
-	size_t fontSize = 40;
-	TTF_Font *menuFont = TTF_OpenFont("./lazy.ttf", fontSize);
-	menuButtons[0] = sdlCreateButton(gWindow,
-								 gRenderer,
+	newMenu->bannerText = NULL;
+	newMenu->bannerBackground = NULL;
+	newMenu->gWindow = gWindow;
+	newMenu->gRenderer = gRenderer;
+	newMenu->fontSize = 40;
+	newMenu->menuFont = TTF_OpenFont("./CaviarDreams.ttf", newMenu->fontSize);
+
+	menuInitButtons(newMenu);
+	menuInitBanner(newMenu);
+
+	return newMenu;
+}
+
+
+void menuInitButtons(menu *m) {
+	m->menuButtons[0] = sdlCreateButton(m->gWindow,
+								 m->gRenderer,
 								 "Play",
-								 menuFont,
+								 m->menuFont,
 								 0xFF,
 								 0xF8,
 								 0xDC,
 								 SCREEN_WIDTH,
-								 fontSize + 25,
+								 m->fontSize + 25,
 								 0,
-								 SCREEN_HEIGHT * 1/5 - (fontSize + 25) / 2,
+								 SCREEN_HEIGHT * 2/6 - (m->fontSize + 25) / 2,
 								 (void (*)(int *))menuPlayAction);
 
-	menuButtons[1] = sdlCreateButton(gWindow,
-								 gRenderer,
+	m->menuButtons[1] = sdlCreateButton(m->gWindow,
+								 m->gRenderer,
 								 "Load (WIP)",
-								 menuFont,
+								 m->menuFont,
 								 0xFF,
 								 0xF8,
 								 0xDC,
 								 SCREEN_WIDTH,
-								 fontSize + 25,
+								 m->fontSize + 25,
 								 0,
-								 SCREEN_HEIGHT * 2/5 - (fontSize + 25) / 2,
+								 SCREEN_HEIGHT * 3/6 - (m->fontSize + 25) / 2,
 								 (void (*)(int *))menuLoadAction);
 	
-	menuButtons[2] = sdlCreateButton(gWindow,
-								 gRenderer,
+	m->menuButtons[2] = sdlCreateButton(m->gWindow,
+								 m->gRenderer,
 								 "Settings (WIP)",
-								 menuFont,
+								 m->menuFont,
 								 0xFF,
 								 0xF8,
 								 0xDC,
 								 SCREEN_WIDTH,
-								 fontSize + 25,
+								 m->fontSize + 25,
 								 0,
-								 SCREEN_HEIGHT * 3/5 - (fontSize + 25) / 2,
+								 SCREEN_HEIGHT * 4/6 - (m->fontSize + 25) / 2,
 								 (void (*)(int *))menuSettingsAction);
 	
-	menuButtons[3] = sdlCreateButton(gWindow,
-								 gRenderer,
+	m->menuButtons[3] = sdlCreateButton(m->gWindow,
+								 m->gRenderer,
 								 "Quit",
-								 menuFont,
+								 m->menuFont,
 								 0xFF,
 								 0xF8,
 								 0xDC,
 								 SCREEN_WIDTH,
-								 fontSize + 25,
+								 m->fontSize + 25,
 								 0,
-								 SCREEN_HEIGHT * 4/5 - (fontSize + 25) / 2,
+								 SCREEN_HEIGHT * 5/6 - (m->fontSize + 25) / 2,
 								 (void (*)(int *))menuQuitAction);
 	
 }
 
-void menuHandleEvents(LButton *menuButtons[], SDL_Event *e, GameState *gs) {
+void menuInitBanner(menu *m) {
+
+	/* text */
+	SDL_Color c = {0x00, 0x00, 0x00};
+	m->bannerText = LTexture_New();
+	LTexture_Init(m->bannerText, m->gWindow, m->gRenderer);
+	LTexture_SetFont(m->bannerText, m->menuFont);
+	LTexture_LoadFromRenderedText(m->bannerText, "COLOR FLOOD", c);
+
+	/* background ? */
+}
+
+void menuDelete(menu *m) {
 	int i;
 	for(i=0; i<MENU_BUTTONS_COUNT; i++) {
-		LButton_HandleEvent(menuButtons[i], e, (int *)gs);
+		LButton_Delete(m->menuButtons[i]);
+		m->menuButtons[i] = NULL;
+	}
+	LTexture_Delete(m->bannerText);
+	LTexture_Delete(m->bannerBackground);
+	TTF_CloseFont(m->menuFont);
+
+	m->bannerText = NULL;
+	m->bannerBackground = NULL;
+	m->menuFont = NULL;
+	m->gWindow = NULL;
+	m->gRenderer = NULL;
+
+
+	free(m);
+
+}
+
+void menuHandleEvents(menu *m, SDL_Event *e, GameState *gs) {
+	int i;
+	for(i=0; i<MENU_BUTTONS_COUNT; i++) {
+		LButton_HandleEvent(m->menuButtons[i], e, (int *)gs);
 	}
 }
 
-void menuRender(LButton *menuButtons[]) {
+void menuRender(menu *m) {
 	int i;
 	for(i=0; i<MENU_BUTTONS_COUNT; i++) {
-		LButton_Render(menuButtons[i]);
+		LButton_Render(m->menuButtons[i]);
 	}
+	menuBannerRender(m);
+}
+
+void menuBannerRender(menu *m) {
+	LTexture_Render(m->bannerText, 
+			        SCREEN_HEIGHT * 1/6 - m->fontSize / 2,
+					(SCREEN_WIDTH - LTexture_GetWidth(m->bannerText)) / 2,
+					NULL,
+					0,
+					NULL,
+					SDL_FLIP_NONE);
 }
 
 GameState menuRoutine(SDL_Window **gWindow, SDL_Renderer **gRenderer, SDL_Event *e, GameState *gs) {
-	LButton *menuButtons[MENU_BUTTONS_COUNT];
-	menuInitButtons(gWindow, gRenderer, menuButtons);
+	menu *m = menuInit(gWindow, gRenderer);
 
 	while((*gs) == GAMESTATE_MENU) {
+		/* window background color */
 		SDL_SetRenderDrawColor(*gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 		SDL_RenderClear(*gRenderer);
 
@@ -86,40 +143,33 @@ GameState menuRoutine(SDL_Window **gWindow, SDL_Renderer **gRenderer, SDL_Event 
 				*gs = GAMESTATE_QUIT;
 			}
 			else {
-				menuHandleEvents(menuButtons, e, gs);
+				menuHandleEvents(m, e, gs);
 			}
 		}
 		
-		menuRender(menuButtons);
+		menuRender(m);
 
 		SDL_RenderPresent(*gRenderer);
 	}
-	int i;
-	for(i=0; i<MENU_BUTTONS_COUNT; i++) {
-		LButton_Delete(menuButtons[i]);
-		menuButtons[i] = NULL;
-	}
 
+	menuDelete(m);
+	
 	return *gs;
 }
 
 
 void menuPlayAction(GameState *gs) {
 	(*gs) = GAMESTATE_PLAYING;
-	/* TODO : create a game here ? */
 }
 
 void menuLoadAction(GameState *gs) {
 	(*gs) = GAMESTATE_LOAD;
-	/* TODO : load saves here, preview ? */
 }
 
 void menuSettingsAction(GameState *gs) {
 	(*gs) = GAMESTATE_SETTINGS;
-	/* TODO : rendering a settings menu here ? */
 }
 
 void menuQuitAction(GameState *gs) {
 	(*gs) = GAMESTATE_QUIT;
-	/* TODO : free a bunch of shit here I guess */
 }
