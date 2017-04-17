@@ -7,6 +7,8 @@ LButton* LButton_New(void) {
 	b->mPosition.y = 0;
 	b->mBackground = NULL;
 	b->s = LBUTTON_NEUTRAL;
+
+	return b;
 }
 
 void LButton_Delete(LButton *b) {

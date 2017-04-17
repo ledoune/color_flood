@@ -8,8 +8,6 @@
 #define SIDES_MARGINS 30
 #define BUTTON_MARGIN 10
 
-static size_t buttonSide = 0;
-
 typedef struct sdlBoard {
 	SDL_Window **gWindow;
 	SDL_Renderer **gRenderer;

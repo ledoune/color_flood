@@ -152,11 +152,11 @@ void LTexture_Render(LTexture *t, int x, int y, SDL_Rect* clip, double angle, SD
 
 }
 
-size_t LTexture_GetWidth(LTexture *t) {
+int LTexture_GetWidth(LTexture *t) {
 	return t->mWidth;
 }
 
-size_t LTexture_GetHeight(LTexture *t) {
+int LTexture_GetHeight(LTexture *t) {
 	return t->mHeight;
 }
 

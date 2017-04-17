@@ -66,16 +66,14 @@ LButton* sdlCreateButton(SDL_Window **gWindow, SDL_Renderer **gRenderer, const c
 		t = LTexture_New();
 		LTexture_Init(t, gWindow, gRenderer);
 		LTexture_SetFont(t, font);
-		SDL_Color c = {0, 0, 0};
+		SDL_Color c = {0x00, 0x00, 0x00, 0xFF};
 		LTexture_LoadFromRenderedText(t, text, c);
 	}
 
 	LTexture *bk = LTexture_New();
 	LTexture_Init(bk, gWindow, gRenderer);
-	bool targetOK = true;
 	if(!LTexture_SetGeometryMode(bk, width, height)) {
 		fprintf(stderr,"Failed to create target texture for button %s!\n", text);
-		targetOK = false;
 	}
 	LTexture_SetAsRenderTarget(bk);
 

@@ -2,7 +2,7 @@ CC		= gcc
 
 RM		= rm -rf
 
-CFLAGS		= -Wall -Wextra -ansi -pedantic -std=c11
+CFLAGS		= -Wall -Wextra -ansi -pedantic -std=c11 -O3
 LIB		= -lSDL2 -lSDL2_image -lSDL2_ttf
 
 MODULES 	= game sdl
@@ -18,7 +18,7 @@ VPATH 		= %.c $(SRC_DIR)
 
 define make-goal
 $1/%.o: %.c
-	$(CC) -c $$< -o $$@
+	$(CC) $(CFLAGS) -c $$< -o $$@
 endef
 
 .PHONY: all checkdirs clean fclean

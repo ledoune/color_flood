@@ -75,7 +75,7 @@ void menuInitButtons(menu *m) {
 void menuInitBanner(menu *m) {
 
 	/* text */
-	SDL_Color c = {0x00, 0x00, 0x00};
+	SDL_Color c = {0x00, 0x00, 0x00, 0xFF};
 	m->bannerText = LTexture_New();
 	LTexture_Init(m->bannerText, m->gWindow, m->gRenderer);
 	LTexture_SetFont(m->bannerText, m->menuFont);

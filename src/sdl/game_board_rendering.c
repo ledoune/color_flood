@@ -1,5 +1,7 @@
 #include "game_board_rendering.h"
 
+static size_t buttonSide = 0;
+
 sdlBoard* boardInit(game *g, SDL_Window **gWindow, SDL_Renderer **gRenderer) {
 	sdlBoard *newBoard = (sdlBoard *)calloc(1, sizeof(sdlBoard));
 
@@ -93,7 +95,7 @@ void boardInitBanner(sdlBoard *b) {
 	b->bannerTitle = LTexture_New();
 	LTexture_Init(b->bannerTitle, b->gWindow, b->gRenderer);
 	LTexture_SetFont(b->bannerTitle, b->bannerFont);
-	SDL_Color c = {0x00, 0x00, 0x00};
+	SDL_Color c = {0x00, 0x00, 0x00, 0xFF};
 	LTexture_LoadFromRenderedText(b->bannerTitle,"COLOR FLOOD", c);
 
 	b->bannerTurnCounter = LTexture_New();
@@ -104,7 +106,7 @@ void boardInitBanner(sdlBoard *b) {
 }
 
 void boardUpdateTurn(sdlBoard *b) {
-	/* should be enough space for a loooot if turns */
+	/* should be enough space for a loooot of turns */
 	char str[100];
 	sprintf(str, "Turn %d", b->g->turnCount);
 
@@ -113,7 +115,7 @@ void boardUpdateTurn(sdlBoard *b) {
 	b->bannerTurnCounter = LTexture_New();
 	LTexture_Init(b->bannerTurnCounter, b->gWindow, b->gRenderer);
 	LTexture_SetFont(b->bannerTurnCounter, b->bannerFont);
-	SDL_Color c = {0x00, 0x00, 0x00};
+	SDL_Color c = {0x00, 0x00, 0x00, 0xFF};
 	LTexture_LoadFromRenderedText(b->bannerTurnCounter, str, c);
 
 }

@@ -48,8 +48,8 @@ void LTexture_SetAlpha(LTexture *t, uint8_t alpha);
 void LTexture_Render(LTexture *t, int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip);
 
 /* access info */
-size_t LTexture_GetWidth(LTexture *t);
-size_t LTexture_GetHeight(LTexture *t);
+int LTexture_GetWidth(LTexture *t);
+int LTexture_GetHeight(LTexture *t);
 TTF_Font* LTexture_GetFont(LTexture *t);
 SDL_Renderer* LTexture_GetRenderer(LTexture *t);
 SDL_Window* LTexture_GetWindow(LTexture *t);

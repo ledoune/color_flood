@@ -3,7 +3,7 @@
 #include "game_menu_rendering.h"
 #include "game_board_rendering.h"
 
-int main(int argc, char *argv[]) {	
+int main(void) {	
 	SDL_Window *gWindow = NULL;
 	SDL_Renderer *gRenderer = NULL;
 	/* default settings for a game */
