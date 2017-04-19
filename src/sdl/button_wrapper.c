@@ -12,6 +12,7 @@ LButton* LButton_New(void) {
 }
 
 void LButton_Delete(LButton *b) {
+	LTexture_Delete(b->mText);
 	LTexture_Delete(b->mBackground);
 	free(b);
 }

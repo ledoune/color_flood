@@ -23,6 +23,7 @@ void boardDelete(sdlBoard *b) {
 		LButton_Delete(b->boardButtons[i]);
 		b->boardButtons[i] = NULL;
 	}
+	free(b->boardButtons);
 	LButton_Delete(b->bannerButtons[0]);
 	LButton_Delete(b->bannerButtons[1]);
 	LTexture_Delete(b->bannerTitle);
@@ -266,6 +267,7 @@ void boardGameOverRoutine(sdlBoard *b, SDL_Event *e, GameState *gs) {
 	}
 			
 	free(directions);
+	free(yBases);
 	LTexture_Delete(gameOverMessage);
 	LTexture_Delete(continueMessage);
 }
