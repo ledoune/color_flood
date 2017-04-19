@@ -9,6 +9,7 @@
 
 #include "texture_wrapper.h"
 #include "button_wrapper.h"
+#include "textbox_wrapper.h"
 
 #define SCREEN_WIDTH 480
 #define SCREEN_HEIGHT 640

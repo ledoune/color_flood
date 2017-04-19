@@ -41,6 +41,7 @@ bool sdlInit(SDL_Window **gWindow, SDL_Renderer **gRenderer) {
 				/* initialize SDL ttf */
 				if(TTF_Init() == -1) {
 					fprintf(stderr,"SDL_ttf could not initialize! SDL_ttf Error %s\n", TTF_GetError());
+					success = false;
 				}
 			}
 		}
@@ -55,6 +56,7 @@ void sdlClose(SDL_Window **gWindow, SDL_Renderer **gRenderer) {
 	*gWindow = NULL;
 	*gRenderer = NULL;
 
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }

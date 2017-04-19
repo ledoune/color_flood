@@ -3,7 +3,7 @@ CC		= gcc
 RM		= rm -rf
 
 CFLAGS		= -Wall -Wextra -ansi -pedantic -std=c11 -O3
-LIB		= -lSDL2 -lSDL2_image -lSDL2_ttf
+LIB		= -lSDL2 -lSDL2_image -lSDL2_ttf -lm
 
 MODULES 	= game sdl
 SRC_DIR 	= $(addprefix src/,$(MODULES))

@@ -2,12 +2,13 @@
 #include "game_states.h"
 #include "game_menu_rendering.h"
 #include "game_board_rendering.h"
+#include "game_settings_rendering.h"
 
 int main(void) {	
 	SDL_Window *gWindow = NULL;
 	SDL_Renderer *gRenderer = NULL;
 	/* default settings for a game */
-	int boardSize = 12, cNb = 6;
+	int boardSize = 12, cNb = 4;
 	game *g = NULL;
 
 	srand(time(NULL));
@@ -31,6 +32,10 @@ int main(void) {
 					gs = boardRoutine(g, &gWindow, &gRenderer, &e);
 					gameFree(g);
 					g = NULL;
+					break;
+
+				case GAMESTATE_SETTINGS:
+					gs = settingsRoutine(&gWindow, &gRenderer, &e, &boardSize, &cNb);
 					break;
 				default:
 					gs = GAMESTATE_MENU;
