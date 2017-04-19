@@ -1,6 +1,7 @@
 #ifndef _GAME_BOARD_RENDERING_H
 #define _GAME_BOARD_RENDERING_H
 
+#include <math.h>
 #include "sdl_utils.h"
 #include "game_states.h"
 #include "../game/game.h"

@@ -23,7 +23,6 @@ void boardDelete(sdlBoard *b) {
 		LButton_Delete(b->boardButtons[i]);
 		b->boardButtons[i] = NULL;
 	}
-	/* TODO : banner buttons */
 	LButton_Delete(b->bannerButtons[0]);
 	LButton_Delete(b->bannerButtons[1]);
 	LTexture_Delete(b->bannerTitle);
@@ -72,8 +71,8 @@ void boardInitBanner(sdlBoard *b) {
 									 "Menu",
 									 b->bannerFont,
 									 0xFF,
-									 0xFF,
-									 0xFF,
+									 0xF8,
+									 0xDC,
 									 w + 5,
 									 h + 5,
 									 SIDES_MARGINS,
@@ -85,7 +84,9 @@ void boardInitBanner(sdlBoard *b) {
 									 "Save",
 									 b->bannerFont,
 									 0xFF,
-									 0xFF, 0xFF, w + 5,
+									 0xF8,
+									 0xDC, 
+									 w + 5,
 									 h + 5,
 									 SCREEN_WIDTH - SIDES_MARGINS - w - 5,
 									 SIDES_MARGINS,
@@ -206,6 +207,69 @@ void boardRenderBoard(sdlBoard *b) {
 	}
 }
 
+void boardRenderGameOverAnimation(sdlBoard *b, int *directions, int *yBases) {
+	int i, x, y;
+	for(i=0; i<b->g->cNb; i++) {
+		/* speeds accordings to the colors
+		 * TODO : make this prettier and more readable 
+		 */
+		x = (b->boardButtons[i]->mPosition.x + directions[i] * (b->g->cTab[i].R + b->g->cTab[i].G) / 60);
+		if( x >	(SCREEN_WIDTH - LTexture_GetWidth(b->boardButtons[i]->mBackground)) || x < 0) directions[i] *= -1;
+
+		yBases[i] = (yBases[i] + (b->g->cTab[i].R + b->g->cTab[i].G) / 60) % 2147483647;
+		y = SCREEN_HEIGHT - buttonSide - abs(sin((float)yBases[i] / SCREEN_WIDTH * 3.14159) * b->g->cTab[i].B);
+
+		LButton_SetPosition(b->boardButtons[i], x, y);
+	}
+
+	boardRenderButtons(b->boardButtons, b->g->cNb);
+}
+
+void boardGameOverRoutine(sdlBoard *b, SDL_Event *e, GameState *gs) {
+	LTexture *gameOverMessage = LTexture_New();
+	LTexture_Init(gameOverMessage, b->gWindow, b->gRenderer);
+	LTexture_SetFont(gameOverMessage, b->bannerFont);
+	SDL_Color c = {0x00, 0x00, 0x00, 0xFF};
+	char str[100];
+	sprintf(str,"Congratulation you have finished in %d turns!", b->g->turnCount);
+	LTexture_LoadFromRenderedText(gameOverMessage, str, c);
+
+	LTexture *continueMessage = LTexture_New();
+	LTexture_Init(continueMessage, b->gWindow, b->gRenderer);
+	LTexture_SetFont(continueMessage, b->bannerFont);
+	LTexture_LoadFromRenderedText(continueMessage, "Clic to continue", c);
+
+	int *directions = (int *)calloc(b->g->cNb, sizeof(int));
+	int *yBases = (int *)calloc(b->g->cNb, sizeof(int));
+	int i;
+	for (i=0; i<b->g->cNb; i++) {
+		directions[i] = 1;
+		yBases[i] = b->boardButtons[i]->mPosition.y;
+	}
+
+	while(*gs == GAMESTATE_GAMEOVER) {
+		while(SDL_PollEvent(e) != 0) {
+			if(e->type == SDL_MOUSEBUTTONUP) {
+				*gs = GAMESTATE_MENU;
+			}
+			else if(e->type == SDL_QUIT) {
+				*gs = GAMESTATE_QUIT;
+			}
+		}
+		SDL_SetRenderDrawColor(*(b->gRenderer), 0xFF, 0xFF, 0xFF, 0xFF);
+		SDL_RenderClear(*(b->gRenderer));
+
+		LTexture_Render(gameOverMessage, (SCREEN_WIDTH - LTexture_GetWidth(gameOverMessage)) / 2, SIDES_MARGINS, NULL, 0, NULL, SDL_FLIP_NONE);
+		LTexture_Render(continueMessage, (SCREEN_WIDTH - LTexture_GetWidth(continueMessage)) / 2, SIDES_MARGINS + LTexture_GetHeight(gameOverMessage), NULL, 0, NULL, SDL_FLIP_NONE);
+		boardRenderGameOverAnimation(b, directions, yBases);
+		SDL_RenderPresent(*(b->gRenderer));
+	}
+			
+	free(directions);
+	LTexture_Delete(gameOverMessage);
+	LTexture_Delete(continueMessage);
+}
+
 GameState boardRoutine(game *g, SDL_Window **gWindow, SDL_Renderer **gRenderer, SDL_Event *e) {
 	int playerColor = -1;
 	GameState gs = GAMESTATE_PLAYING;
@@ -235,8 +299,8 @@ GameState boardRoutine(game *g, SDL_Window **gWindow, SDL_Renderer **gRenderer, 
 		SDL_RenderPresent(*gRenderer);
 
 		if(gameOver(b->g)) {
-			/* TODO : GAMESTATE_GAMEOVER */
-			gs = GAMESTATE_MENU;
+			gs = GAMESTATE_GAMEOVER;
+			boardGameOverRoutine(b, e, &gs);
 		}
 	}
 	boardDelete(b);

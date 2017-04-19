@@ -19,6 +19,7 @@ typedef struct t_game {
 
 game *gameInit(int size, int cNb);
 void gamePrint(game *g);
+void gameClear(game *g);
 void gameFree(game *g);
 void gamePlayTurn(game *g);
 void gamePlayTurnSDL(game *g, int newColor);
