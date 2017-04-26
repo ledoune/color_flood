@@ -44,12 +44,12 @@ void gamePlayTurn(game *g) {
 				printf("Not a valid color\n");
 			}
 			else {
+				g->turnCount++;
 				gridSetColor(g->grid, g->cTab[color], 0, 0);
 				gridFloodFillColor(g->grid, 0, 0);
 				gridSetLabel(g->grid, gridGetMaxLabel(g->grid) + g->turnCount, 0, 0);
 				gridFloodFillLabel(g->grid, 0, 0);
 				g->cPlayer = g->cTab[color];
-				g->turnCount++;
 			}
     	}
 	}

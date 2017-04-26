@@ -224,7 +224,7 @@ int gridLabelCC(grid *g) {
 			}
 		}
 	}
-	return nxtLabel;
+	return nxtLabel-1;
 }
 
 void gridPrint(grid *g, RGB *cTab, int cNb) {
