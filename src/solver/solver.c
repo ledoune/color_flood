@@ -122,9 +122,7 @@ void solve(const int *adjMatrix, const int *lblToColor, int *playerLabels, const
 	}
 	if(playedColor != -1) stackPush(&solution, playedColor);
 	/* check if it is a solution and save if it's the case */
-	printf("test %d\n", maxLabel);
 	if(solverGameOver(playerLabels, maxLabel)) {
-		exit(1);
 		*maxDepth = stackSize(solution);
 		stackFree(&best);
 		best = stackCopy(solution);
