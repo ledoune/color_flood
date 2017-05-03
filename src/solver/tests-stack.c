@@ -15,6 +15,9 @@ int main(void) {
 	stackPrint(s1);
 	stackPrint(s2);
 
+	stackFree(&s2);
+	s2 = stackCopy(s1);
+
 	stackFree(&s1);
 	stackFree(&s2);
 
