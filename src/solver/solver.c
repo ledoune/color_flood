@@ -10,7 +10,7 @@ int main(void) {
 
 	srand(time(NULL));
 
-	game *g = gameInit(8, 6);
+	game *g = gameInit(10, 5);
 	gamePrint(g);
 
 	int *adjMatrix = solverComputeAdjMatrix(g);
@@ -109,21 +109,36 @@ void solve(const int *adjMatrix, const int *lblToColor, int *playerLabels, const
 	/* TODO: make the code prettier and organized */
 
 	/************** PLAY THE COLOR && TAG NEIGHBOUR COLORS ********************/
-	for(i=0; i<maxLabel; i++) {
-		/* if label connected to topright */
-		if(playerLabels[i] == 1) {
-			for(j=0; j<maxLabel; j++) {
-				/* if neighbour and (right color or first call) and not already connected */
-				if(adjMatrix[i*maxLabel + j] == 1 && (lblToColor[j] == playedColor || playedColor == -1) && playerLabels[j] == 0) {
-					if(playedColor != -1) playerLabels[j] = 1;
-					/* mark neighbour colors of the new label */
-					for(k=0; k<maxLabel; k++) {
-						if(markedColors == colorRange - 1) break;
-						neighbourColor = lblToColor[k];
-						if(adjMatrix[j*maxLabel + k] == 1 && neighbourColor != playedColor && nextColors[neighbourColor] == 0 && playerLabels[k] == 0) {
-							nextColors[neighbourColor] = 1;
-							markedColors++;
+	if(playedColor == -1) {
+		/* if first turn, no color played, you want to tag colors next to lbl 1 */
+		for(k=0; k<maxLabel; k++) {
+			if(markedColors == colorRange - 1) break;
+			neighbourColor = lblToColor[k];
+			if(adjMatrix[k] == 1 && nextColors[neighbourColor] == 0 && playerLabels[k] == 0) {
+				nextColors[neighbourColor] = 1;
+				markedColors++;
+			}
+		}
+	}
+	else {
+		for(i=0; i<maxLabel; i++) {
+			/* if label connected to topright */
+			if(playerLabels[i] == 1) {
+				for(j=0; j<maxLabel; j++) {
+					
+					if(adjMatrix[i*maxLabel + j] == 1 && lblToColor[j] == playedColor && playerLabels[j] == 0) {
+						/* if neighbour and (right color or first call) and not already connected */
+						playerLabels[j] = 1;
+						/* mark neighbour colors of the new label */
+						for(k=0; k<maxLabel; k++) {
+							if(markedColors == colorRange - 1) break;
+							neighbourColor = lblToColor[k];
+							if(adjMatrix[j*maxLabel + k] == 1 && neighbourColor != playedColor && nextColors[neighbourColor] == 0 && playerLabels[k] == 0) {
+								nextColors[neighbourColor] = 1;
+								markedColors++;
+							}
 						}
+						
 					}
 				}
 			}
@@ -132,7 +147,7 @@ void solve(const int *adjMatrix, const int *lblToColor, int *playerLabels, const
 
 	/************** ADD PLAYED COLOR TO CURRENT SOLUTION ********************/
 	if(playedColor != -1) stackPush(&solution, playedColor);
- 
+
 	/************** IF GAME OVER SAVE SOLUTION IN BEST ********************/
 	if(solverGameOver(playerLabels, maxLabel)) {
 		*maxDepth = stackSize(solution);
