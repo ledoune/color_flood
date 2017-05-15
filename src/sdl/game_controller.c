@@ -3,6 +3,7 @@
 #include "game_menu_rendering.h"
 #include "game_board_rendering.h"
 #include "game_settings_rendering.h"
+#include "game_load_rendering.h"
 
 int main(void) {	
 	SDL_Window *gWindow = NULL;
@@ -10,7 +11,6 @@ int main(void) {
 	/* default settings for a game */
 	int boardSize = 12, cNb = 4;
 	game *g = NULL;
-
 	srand(time(NULL));
 
 	if(!sdlInit(&gWindow, &gRenderer)) {
@@ -28,7 +28,8 @@ int main(void) {
 					break;
 
 				case GAMESTATE_PLAYING:
-					g = gameInit(boardSize, cNb);
+					/* if no game loaded from save, create a new one */
+					if(g == NULL) g = gameInit(boardSize, cNb);
 					gs = boardRoutine(g, &gWindow, &gRenderer, &e);
 					gameFree(g);
 					g = NULL;
@@ -37,6 +38,10 @@ int main(void) {
 				case GAMESTATE_SETTINGS:
 					gs = settingsRoutine(&gWindow, &gRenderer, &e, &boardSize, &cNb);
 					break;
+				case GAMESTATE_LOAD:
+					gs = previewRoutine(&g, &gWindow, &gRenderer, &e);
+					break;
+
 				default:
 					gs = GAMESTATE_MENU;
 					gs = menuRoutine(&gWindow, &gRenderer, &e, &gs);

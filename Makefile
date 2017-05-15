@@ -2,7 +2,7 @@ CC		= gcc
 
 RM		= rm -rf
 
-CFLAGS	= -Wall -Wextra -ansi -pedantic -std=c11 -O3
+CFLAGS	= -Wall -Wextra -ansi -pedantic -std=c11 -O3 -g
 LIB		= -lSDL2 -lSDL2_image -lSDL2_ttf -lm
 
 MODULES 	= game sdl 
@@ -31,13 +31,10 @@ $(NAME): $(OBJ)
 solver : src/solver/solver.c src/solver/stack.c src/game/game.c src/game/grid.c src/game/rgb.c
 	$(CC) $(CFLAGS) $^ -o $@
 
-solver_link: $(OBJ_SLV)
-	$(CC) $^ -o $@
-
 checkdirs: $(BUILD_DIR)
 
 $(BUILD_DIR):
-	@mkdir -p $@
+	@mkdir -p $@ saves
 
 clean:
 	$(RM) $(BUILD_DIR)

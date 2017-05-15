@@ -33,7 +33,7 @@ void menuInitButtons(menu *m) {
 
 	m->menuButtons[1] = sdlCreateButton(m->gWindow,
 								 m->gRenderer,
-								 "Load (WIP)",
+								 "Load",
 								 m->menuFont,
 								 0xFF,
 								 0xF8,

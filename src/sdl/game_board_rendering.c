@@ -91,8 +91,7 @@ void boardInitBanner(sdlBoard *b) {
 									 h + 5,
 									 SCREEN_WIDTH - SIDES_MARGINS - w - 5,
 									 SIDES_MARGINS,
-									 (void (*)(int *))menuButtonAction);
-	/* TODO : save function */
+									 (void (*)(int *))saveButtonAction);
 
 	b->bannerTitle = LTexture_New();
 	LTexture_Init(b->bannerTitle, b->gWindow, b->gRenderer);
@@ -290,8 +289,12 @@ GameState boardRoutine(game *g, SDL_Window **gWindow, SDL_Renderer **gRenderer, 
 			}
 		}
 
+		if(b->gs == GAMESTATE_SAVE) {
+			gameExport(g);
+			b->gs = GAMESTATE_PLAYING;
+		}
 		if(gs != GAMESTATE_QUIT) gs = b->gs;
-
+		
 		gamePlayTurnSDL(b->g, playerColor);
 
 		boardRenderBanner(b);
@@ -318,4 +321,10 @@ void colorButtonAction(int *playerColor) {
 
 void menuButtonAction(GameState *gs) {
 	*gs = GAMESTATE_MENU;
+}
+
+/* if the button is spammed, it writes in the same file, 
+ * but the import still works fine */
+void saveButtonAction(GameState *gs) {
+	*gs = GAMESTATE_SAVE;
 }

@@ -74,12 +74,10 @@ game *gameImport(char *save) {
 
 	char buffer[256];
 	int size, colors;
-	/* char *save_path = "saves/";
-	 * strcat(save_path, save)
-	 * FILE *fp = fopen(save_path,"r");
-	 */ 
 
-	FILE *fp = fopen(save,"r");
+	sprintf(buffer, "%s/%s",SAVES_FOLDER, save);
+	
+	FILE *fp = fopen(buffer,"r");
 	if(fp == NULL) {
 		printf("save not found\n");
 		exit(1);
@@ -118,7 +116,7 @@ void gameExport(game *g) {
 
 	char name[100];
 	/* generate name from date */
-	sprintf(name, "save_%ju.data",time(NULL));
+	sprintf(name, "%s/save_%ju.data", SAVES_FOLDER, time(NULL));
 	FILE *fp = fopen(name,"ab+");
 	if(fp == NULL) exit(1);
 

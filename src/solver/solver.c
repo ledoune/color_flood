@@ -10,7 +10,7 @@ int main(void) {
 
 	srand(time(NULL));
 
-	game *g = gameInit(10, 5);
+	game *g = gameInit(10, 6);
 	gamePrint(g);
 
 	int *adjMatrix = solverComputeAdjMatrix(g);
@@ -107,6 +107,7 @@ void solve(const int *adjMatrix, const int *lblToColor, int *playerLabels, const
 	/* TODO: to provide every solution of the optimal size, change the recursion tests && solution stockage (ie linked list) */
 	/* TODO: find out why the solver doesn't always launch; probably doesn't find a color to play, but why ? */
 	/* TODO: make the code prettier and organized */
+	/* TODO: Double linked list instead of a "matrice creuse" */
 
 	/************** PLAY THE COLOR && TAG NEIGHBOUR COLORS ********************/
 	if(playedColor == -1) {

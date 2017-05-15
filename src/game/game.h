@@ -7,6 +7,8 @@
 #include "rgb.h"
 #include "grid.h"
 
+#define SAVES_FOLDER "saves"
+
 typedef struct t_game {
 	grid *grid;
 	int size;

@@ -36,6 +36,7 @@ void boardHandleEvents(sdlBoard *b, SDL_Event *e, int *playerColor);
 /* render functions */
 void boardRenderButtons(LButton **boardButtons, int buttonsCount);
 void boardRenderBanner(sdlBoard *b);
+void boardRenderTile(SDL_Renderer **gRenderer, int x, int y, size_t side, RGB color);
 void boardRenderBoard(sdlBoard *b);
 
 /* routine for controller */
@@ -44,5 +45,6 @@ GameState boardRoutine(game *g, SDL_Window **gWindow, SDL_Renderer **gRenderer, 
 /* trick : pass the x coodinate, the function replace it by the player color */
 void colorButtonAction(int *playerColor);
 void menuButtonAction(GameState *gs);
+void saveButtonAction(GameState *gs);
 
 #endif
