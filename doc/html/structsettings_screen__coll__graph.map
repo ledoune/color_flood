@@ -1,0 +1,5 @@
+<map id="settingsScreen" name="settingsScreen">
+<area shape="rect" id="node2" href="$structbutton.html" title="button" alt="" coords="110,118,174,145"/>
+<area shape="rect" id="node3" href="$structtexture.html" title="texture" alt="" coords="90,5,159,32"/>
+<area shape="rect" id="node4" href="$structtextbox.html" title="textbox" alt="" coords="210,118,282,145"/>
+</map>

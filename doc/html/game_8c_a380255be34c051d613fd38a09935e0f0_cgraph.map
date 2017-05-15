@@ -1,0 +1,4 @@
+<map id="gameOver" name="gameOver">
+<area shape="rect" id="node2" href="$grid_8c.html#a3377767dd9dd32fdb2568ddc5377742c" title="Cherche si la grille est composée d&#39;une seule couleur. " alt="" coords="144,5,255,32"/>
+<area shape="rect" id="node3" href="$rgb_8c.html#a69f8efffc6c16e0b2379dbc3467d5364" title="Teste deux couleurs pour savoir si ce sont les mêmes. " alt="" coords="303,5,381,32"/>
+</map>

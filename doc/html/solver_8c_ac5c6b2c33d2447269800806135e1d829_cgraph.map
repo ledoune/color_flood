@@ -1,0 +1,4 @@
+<map id="processNeighbours" name="processNeighbours">
+<area shape="rect" id="node2" href="$grid_8c.html#a75aecdb01dc9eb7a2a796e0548ff41f8" title="Obtient le plus grand label dans la grille. " alt="" coords="200,5,332,32"/>
+<area shape="rect" id="node3" href="$grid_8c.html#a42d5cd3f41ffe6bff0152df208a9d6b3" title="Obtient le label d&#39;une case de la grille. " alt="" coords="213,56,319,83"/>
+</map>

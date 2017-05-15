@@ -1,0 +1,7 @@
+<map id="solverComputeLblToColorArray" name="solverComputeLblToColorArray">
+<area shape="rect" id="node2" href="$grid_8c.html#a75aecdb01dc9eb7a2a796e0548ff41f8" title="Obtient le plus grand label dans la grille. " alt="" coords="279,5,411,32"/>
+<area shape="rect" id="node3" href="$grid_8c.html#a42d5cd3f41ffe6bff0152df208a9d6b3" title="Obtient le label d&#39;une case de la grille. " alt="" coords="292,56,397,83"/>
+<area shape="rect" id="node4" href="$rgb_8c.html#adafe178d2850e09e825de82e12f5c293" title="Cherche une couleur donnée dans un tableau de couleurs. " alt="" coords="289,107,400,133"/>
+<area shape="rect" id="node6" href="$grid_8c.html#a4d6f2609a0e5c49bd539a3f39f3208e5" title="Donne la couleur d&#39;une case d&#39;une grille. " alt="" coords="293,157,397,184"/>
+<area shape="rect" id="node5" href="$rgb_8c.html#a69f8efffc6c16e0b2379dbc3467d5364" title="Teste deux couleurs pour savoir si ce sont les mêmes. " alt="" coords="459,107,537,133"/>
+</map>

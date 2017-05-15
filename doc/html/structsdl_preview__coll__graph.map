@@ -1,0 +1,7 @@
+<map id="sdlPreview" name="sdlPreview">
+<area shape="rect" id="node2" href="$structbutton.html" title="button" alt="" coords="140,203,204,229"/>
+<area shape="rect" id="node3" href="$structtexture.html" title="texture" alt="" coords="87,96,156,123"/>
+<area shape="rect" id="node4" href="$structt__game.html" title="Structure de la partie. " alt="" coords="248,203,318,229"/>
+<area shape="rect" id="node5" href="$structt__grid.html" title="Structure d&#39;une grille. " alt="" coords="334,96,392,123"/>
+<area shape="rect" id="node6" href="$structt___r_g_b.html" title="Structure d&#39;une couleur en utilisant le code rgb. " alt="" coords="246,5,309,32"/>
+</map>

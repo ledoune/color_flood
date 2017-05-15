@@ -1,0 +1,261 @@
+\hypertarget{solver_8c}{}\section{src/solver/solver.c File Reference}
+\label{solver_8c}\index{src/solver/solver.\+c@{src/solver/solver.\+c}}
+
+
+Gestion du solveur.  
+
+
+{\ttfamily \#include \char`\"{}solver.\+h\char`\"{}}\newline
+Include dependency graph for solver.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{solver_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{solver_8c_ae5efa588412134b93ddda2061176d8be}{print\+Best} (\hyperlink{structt__game}{game} $\ast$g)
+\begin{DoxyCompactList}\small\item\em Trouve une solution par bruteforce si taille $<$ 9, par heuristique sinon, l\textquotesingle{}affiche dans la console, et retourne sa taille. \end{DoxyCompactList}\item 
+void \hyperlink{solver_8c_ac5c6b2c33d2447269800806135e1d829}{process\+Neighbours} (\hyperlink{structt__game}{game} $\ast$g, int x, int y, int $\ast$adj\+Matrix)
+\begin{DoxyCompactList}\small\item\em Modifie la matrice d\textquotesingle{}adjacence. \end{DoxyCompactList}\item 
+int $\ast$ \hyperlink{solver_8c_a61c82bfe85ab52391aff217dc4afc75c}{solver\+Compute\+Adj\+Matrix} (\hyperlink{structt__game}{game} $\ast$g)
+\begin{DoxyCompactList}\small\item\em Crée la matrice d\textquotesingle{}adjacence associée à une partie. \end{DoxyCompactList}\item 
+int $\ast$ \hyperlink{solver_8c_a958c071239440919668cf9df4f7fff13}{solver\+Compute\+Lbl\+To\+Color\+Array} (\hyperlink{structt__game}{game} $\ast$g)
+\begin{DoxyCompactList}\small\item\em Crée un tableau qui contient en i-\/ème position la couleur du i-\/ème label. \end{DoxyCompactList}\item 
+bool \hyperlink{solver_8c_aaf2dd01fab598cfd3e1fc92ab727da35}{solver\+Game\+Over} (const int $\ast$player\+Labels, const int max\+Label)
+\begin{DoxyCompactList}\small\item\em Teste si la partie est finie. \end{DoxyCompactList}\item 
+void \hyperlink{solver_8c_acf0c40dd323ca07d656f475f672681f9}{solve\+Brute\+Force} (const int $\ast$adj\+Matrix, const int $\ast$lbl\+To\+Color, int $\ast$player\+Labels, const int max\+Label, const int color\+Range, int $\ast$max\+Depth, int curr\+Depth, \hyperlink{structnode}{stack} solution, \hyperlink{structnode}{stack} $\ast$best, int played\+Color)
+\begin{DoxyCompactList}\small\item\em Retourne dans la stack best la meilleure solution. \end{DoxyCompactList}\item 
+void \hyperlink{solver_8c_ad0d28f9e5b065430ab0cc7cb51c91c8d}{solve\+Heuristic} (const int $\ast$adj\+Matrix, const int $\ast$lbl\+To\+Color, int $\ast$player\+Labels, const int max\+Label, const int color\+Range, int $\ast$max\+Depth, int curr\+Depth, \hyperlink{structnode}{stack} solution, \hyperlink{structnode}{stack} $\ast$best, int played\+Color)
+\begin{DoxyCompactList}\small\item\em Retourne dans la stack best la solution trouvée en coloriant le maximum de composantes connexes a chaque tour (NB\+: Copier/\+Coller modifié de la fonction solve\+Brute\+Force, une seule stack suffirait) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Gestion du solveur. 
+
+\begin{DoxyAuthor}{Author}
+Last\+But\+Not\+Least 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Mai 2017 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{solver_8c_ae5efa588412134b93ddda2061176d8be}\label{solver_8c_ae5efa588412134b93ddda2061176d8be}} 
+\index{solver.\+c@{solver.\+c}!print\+Best@{print\+Best}}
+\index{print\+Best@{print\+Best}!solver.\+c@{solver.\+c}}
+\subsubsection{\texorpdfstring{print\+Best()}{printBest()}}
+{\footnotesize\ttfamily print\+Best (\begin{DoxyParamCaption}\item[{\hyperlink{structt__game}{game} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+Trouve une solution par bruteforce si taille $<$ 9, par heuristique sinon, l\textquotesingle{}affiche dans la console, et retourne sa taille. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la partie \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la taille de la solution 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{solver_8c_ae5efa588412134b93ddda2061176d8be_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{solver_8c_ac5c6b2c33d2447269800806135e1d829}\label{solver_8c_ac5c6b2c33d2447269800806135e1d829}} 
+\index{solver.\+c@{solver.\+c}!process\+Neighbours@{process\+Neighbours}}
+\index{process\+Neighbours@{process\+Neighbours}!solver.\+c@{solver.\+c}}
+\subsubsection{\texorpdfstring{process\+Neighbours()}{processNeighbours()}}
+{\footnotesize\ttfamily process\+Neighbours (\begin{DoxyParamCaption}\item[{\hyperlink{structt__game}{game} $\ast$}]{g,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{int $\ast$}]{adj\+Matrix }\end{DoxyParamCaption})}
+
+
+
+Modifie la matrice d\textquotesingle{}adjacence. 
+
+On choisit une case de la grille, on obtient son label et le label d\textquotesingle{}une case voisine \+: ces deux nombres sont les coordonnées dans la matrice d\textquotesingle{}une case où on inscrit 1. On procède de même pour chaque case voisine.
+
+Les autres cases sont laissées à 0.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la partie \\
+\hline
+{\em x} & \+: ligne de la case choisie \\
+\hline
+{\em y} & \+: colonne de la case choisie \\
+\hline
+{\em adj\+Matrix} & \+: la matrice d\textquotesingle{}adjacence à modifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+La matriche d\textquotesingle{}adjacence modifiée 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{solver_8c_ac5c6b2c33d2447269800806135e1d829_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{solver_8c_acf0c40dd323ca07d656f475f672681f9}\label{solver_8c_acf0c40dd323ca07d656f475f672681f9}} 
+\index{solver.\+c@{solver.\+c}!solve\+Brute\+Force@{solve\+Brute\+Force}}
+\index{solve\+Brute\+Force@{solve\+Brute\+Force}!solver.\+c@{solver.\+c}}
+\subsubsection{\texorpdfstring{solve\+Brute\+Force()}{solveBruteForce()}}
+{\footnotesize\ttfamily solve\+Brute\+Force (\begin{DoxyParamCaption}\item[{const int $\ast$}]{adj\+Matrix,  }\item[{const int $\ast$}]{lbl\+To\+Color,  }\item[{int $\ast$}]{player\+Labels,  }\item[{const int}]{max\+Label,  }\item[{const int}]{color\+Range,  }\item[{int $\ast$}]{max\+Depth,  }\item[{int}]{curr\+Depth,  }\item[{\hyperlink{structnode}{stack}}]{solution,  }\item[{\hyperlink{structnode}{stack} $\ast$}]{best,  }\item[{int}]{played\+Color }\end{DoxyParamCaption})}
+
+
+
+Retourne dans la stack best la meilleure solution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em adj\+Matrix} & \+: la matrice d\textquotesingle{}adjacence \\
+\hline
+{\em lbl\+To\+Color} & \+: la tableau qui associe à chaque label sa souleur \\
+\hline
+{\em player\+Labels} & \+: tableau qui contient en i-\/ème position 1 si le i-\/ème label a déjà été connecté au label actuel, 0 sinon \\
+\hline
+{\em max\+Label} & \+: label maximal \\
+\hline
+{\em color\+Range} & \+: nombre de couleurs \\
+\hline
+{\em max\+Depth} & \+: nombre de coups joués dans la meilleure solution \\
+\hline
+{\em curr\+Depth} & \+: nombre de coups dans la solution actuelle \\
+\hline
+{\em solution} & \+: la solution actuelle \\
+\hline
+{\em best} & \+: la meilleure solution \\
+\hline
+{\em played\+Color} & \+: la couleur à jouer \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{solver_8c_acf0c40dd323ca07d656f475f672681f9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{solver_8c_ad0d28f9e5b065430ab0cc7cb51c91c8d}\label{solver_8c_ad0d28f9e5b065430ab0cc7cb51c91c8d}} 
+\index{solver.\+c@{solver.\+c}!solve\+Heuristic@{solve\+Heuristic}}
+\index{solve\+Heuristic@{solve\+Heuristic}!solver.\+c@{solver.\+c}}
+\subsubsection{\texorpdfstring{solve\+Heuristic()}{solveHeuristic()}}
+{\footnotesize\ttfamily solve\+Heuristic (\begin{DoxyParamCaption}\item[{const int $\ast$}]{adj\+Matrix,  }\item[{const int $\ast$}]{lbl\+To\+Color,  }\item[{int $\ast$}]{player\+Labels,  }\item[{const int}]{max\+Label,  }\item[{const int}]{color\+Range,  }\item[{int $\ast$}]{max\+Depth,  }\item[{int}]{curr\+Depth,  }\item[{\hyperlink{structnode}{stack}}]{solution,  }\item[{\hyperlink{structnode}{stack} $\ast$}]{best,  }\item[{int}]{played\+Color }\end{DoxyParamCaption})}
+
+
+
+Retourne dans la stack best la solution trouvée en coloriant le maximum de composantes connexes a chaque tour (NB\+: Copier/\+Coller modifié de la fonction solve\+Brute\+Force, une seule stack suffirait) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em adj\+Matrix} & \+: la matrice d\textquotesingle{}adjacence \\
+\hline
+{\em lbl\+To\+Color} & \+: la tableau qui associe à chaque label sa souleur \\
+\hline
+{\em player\+Labels} & \+: tableau qui contient en i-\/ème position 1 si le i-\/ème label a déjà été connecté au label actuel, 0 sinon \\
+\hline
+{\em max\+Label} & \+: label maximal \\
+\hline
+{\em color\+Range} & \+: nombre de couleurs \\
+\hline
+{\em max\+Depth} & \+: nombre de coups joués dans la meilleure solution \\
+\hline
+{\em curr\+Depth} & \+: nombre de coups dans la solution actuelle \\
+\hline
+{\em solution} & \+: la solution actuelle \\
+\hline
+{\em best} & \+: la meilleure solution \\
+\hline
+{\em played\+Color} & \+: la couleur à jouer \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=301pt]{solver_8c_ad0d28f9e5b065430ab0cc7cb51c91c8d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{solver_8c_a61c82bfe85ab52391aff217dc4afc75c}\label{solver_8c_a61c82bfe85ab52391aff217dc4afc75c}} 
+\index{solver.\+c@{solver.\+c}!solver\+Compute\+Adj\+Matrix@{solver\+Compute\+Adj\+Matrix}}
+\index{solver\+Compute\+Adj\+Matrix@{solver\+Compute\+Adj\+Matrix}!solver.\+c@{solver.\+c}}
+\subsubsection{\texorpdfstring{solver\+Compute\+Adj\+Matrix()}{solverComputeAdjMatrix()}}
+{\footnotesize\ttfamily solver\+Compute\+Adj\+Matrix (\begin{DoxyParamCaption}\item[{\hyperlink{structt__game}{game} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+Crée la matrice d\textquotesingle{}adjacence associée à une partie. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la partie \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la matrice d\textquotesingle{}adjacence 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{solver_8c_a61c82bfe85ab52391aff217dc4afc75c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{solver_8c_a958c071239440919668cf9df4f7fff13}\label{solver_8c_a958c071239440919668cf9df4f7fff13}} 
+\index{solver.\+c@{solver.\+c}!solver\+Compute\+Lbl\+To\+Color\+Array@{solver\+Compute\+Lbl\+To\+Color\+Array}}
+\index{solver\+Compute\+Lbl\+To\+Color\+Array@{solver\+Compute\+Lbl\+To\+Color\+Array}!solver.\+c@{solver.\+c}}
+\subsubsection{\texorpdfstring{solver\+Compute\+Lbl\+To\+Color\+Array()}{solverComputeLblToColorArray()}}
+{\footnotesize\ttfamily solver\+Compute\+Lbl\+To\+Color\+Array (\begin{DoxyParamCaption}\item[{\hyperlink{structt__game}{game} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+Crée un tableau qui contient en i-\/ème position la couleur du i-\/ème label. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la partie \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+le tableau 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{solver_8c_a958c071239440919668cf9df4f7fff13_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{solver_8c_aaf2dd01fab598cfd3e1fc92ab727da35}\label{solver_8c_aaf2dd01fab598cfd3e1fc92ab727da35}} 
+\index{solver.\+c@{solver.\+c}!solver\+Game\+Over@{solver\+Game\+Over}}
+\index{solver\+Game\+Over@{solver\+Game\+Over}!solver.\+c@{solver.\+c}}
+\subsubsection{\texorpdfstring{solver\+Game\+Over()}{solverGameOver()}}
+{\footnotesize\ttfamily solver\+Game\+Over (\begin{DoxyParamCaption}\item[{const int $\ast$}]{player\+Labels,  }\item[{const int}]{max\+Label }\end{DoxyParamCaption})}
+
+
+
+Teste si la partie est finie. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la partie \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true si la partie est finie, false sinon 
+\end{DoxyReturn}

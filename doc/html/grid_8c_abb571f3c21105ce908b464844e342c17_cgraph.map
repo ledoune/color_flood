@@ -1,0 +1,6 @@
+<map id="gridFloodFillLabel" name="gridFloodFillLabel">
+<area shape="rect" id="node2" href="$grid_8c.html#a42d5cd3f41ffe6bff0152df208a9d6b3" title="Obtient le label d&#39;une case de la grille. " alt="" coords="189,5,295,32"/>
+<area shape="rect" id="node3" href="$grid_8c.html#a4d6f2609a0e5c49bd539a3f39f3208e5" title="Donne la couleur d&#39;une case d&#39;une grille. " alt="" coords="190,56,294,83"/>
+<area shape="rect" id="node4" href="$rgb_8c.html#a69f8efffc6c16e0b2379dbc3467d5364" title="Teste deux couleurs pour savoir si ce sont les mêmes. " alt="" coords="203,107,281,133"/>
+<area shape="rect" id="node5" href="$grid_8c.html#a9915684f28fcfbfab54b8cb8cc019057" title="Associe un label à une case de la grille. " alt="" coords="191,157,293,184"/>
+</map>

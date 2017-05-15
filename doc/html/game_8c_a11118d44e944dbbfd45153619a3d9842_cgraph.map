@@ -1,0 +1,9 @@
+<map id="gamePrint" name="gamePrint">
+<area shape="rect" id="node2" href="$rgb_8c.html#af5947037ec0678e4bafc967877cfbb35" title="Affiche un tableau contenant plusieurs couleurs dans la console. " alt="" coords="148,5,256,32"/>
+<area shape="rect" id="node3" href="$rgb_8c.html#a7df3eec610b0fa98a5ccb1cf6a9b00ef" title="Affiche les trois composantes de la couleur dans la console. " alt="" coords="328,31,401,57"/>
+<area shape="rect" id="node4" href="$grid_8c.html#ad1e0b52bf8891e9090312f71e9cd5601" title="Affiche la grille : chaque case est représentée par le rang de sa couleur (comme élément du tableau d..." alt="" coords="163,107,241,133"/>
+<area shape="rect" id="node5" href="$rgb_8c.html#adafe178d2850e09e825de82e12f5c293" title="Cherche une couleur donnée dans un tableau de couleurs. " alt="" coords="309,132,420,159"/>
+<area shape="rect" id="node7" href="$grid_8c.html#ab3139f8df42186aa02e725f5bbf2431a" title="Affiche la grille : chaque case est représentée par son label. " alt="" coords="143,208,261,235"/>
+<area shape="rect" id="node6" href="$rgb_8c.html#a69f8efffc6c16e0b2379dbc3467d5364" title="Teste deux couleurs pour savoir si ce sont les mêmes. " alt="" coords="468,132,547,159"/>
+<area shape="rect" id="node8" href="$grid_8c.html#a42d5cd3f41ffe6bff0152df208a9d6b3" title="Obtient le label d&#39;une case de la grille. " alt="" coords="312,208,417,235"/>
+</map>

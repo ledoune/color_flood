@@ -1,0 +1,5 @@
+<map id="solverComputeAdjMatrix" name="solverComputeAdjMatrix">
+<area shape="rect" id="node2" href="$grid_8c.html#a75aecdb01dc9eb7a2a796e0548ff41f8" title="Obtient le plus grand label dans la grille. " alt="" coords="431,5,563,32"/>
+<area shape="rect" id="node3" href="$solver_8c.html#ac5c6b2c33d2447269800806135e1d829" title="Modifie la matrice d&#39;adjacence. " alt="" coords="236,56,383,83"/>
+<area shape="rect" id="node4" href="$grid_8c.html#a42d5cd3f41ffe6bff0152df208a9d6b3" title="Obtient le label d&#39;une case de la grille. " alt="" coords="444,56,549,83"/>
+</map>

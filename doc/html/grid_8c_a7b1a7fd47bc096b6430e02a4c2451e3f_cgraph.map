@@ -1,0 +1,8 @@
+<map id="gridInitColors" name="gridInitColors">
+<area shape="rect" id="node2" href="$grid_8c.html#ae8a514f42a0cf2a0c7b13d5194489a71" title="Associe à chaque case un label (commun aux autres cases de la même composante connexe) et obtient le ..." alt="" coords="163,56,263,83"/>
+<area shape="rect" id="node3" href="$grid_8c.html#a42d5cd3f41ffe6bff0152df208a9d6b3" title="Obtient le label d&#39;une case de la grille. " alt="" coords="495,5,600,32"/>
+<area shape="rect" id="node4" href="$grid_8c.html#a9915684f28fcfbfab54b8cb8cc019057" title="Associe un label à une case de la grille. " alt="" coords="496,56,599,83"/>
+<area shape="rect" id="node5" href="$grid_8c.html#abb571f3c21105ce908b464844e342c17" title="Modifie le label de toutes les cases appartenant à la même composante connexe qu&#39;une case visée..." alt="" coords="311,107,447,133"/>
+<area shape="rect" id="node6" href="$grid_8c.html#a4d6f2609a0e5c49bd539a3f39f3208e5" title="Donne la couleur d&#39;une case d&#39;une grille. " alt="" coords="495,107,599,133"/>
+<area shape="rect" id="node7" href="$rgb_8c.html#a69f8efffc6c16e0b2379dbc3467d5364" title="Teste deux couleurs pour savoir si ce sont les mêmes. " alt="" coords="508,157,587,184"/>
+</map>

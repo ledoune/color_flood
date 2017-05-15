@@ -1,0 +1,199 @@
+\hypertarget{game_8c}{}\section{src/game/game.c File Reference}
+\label{game_8c}\index{src/game/game.\+c@{src/game/game.\+c}}
+
+
+Gestion du jeu pendant une partie.  
+
+
+{\ttfamily \#include \char`\"{}game.\+h\char`\"{}}\newline
+Include dependency graph for game.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{game_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structt__game}{game} $\ast$ \hyperlink{game_8c_a887f37f53d21c0daee1b6ef659232c41}{game\+Init} (int size, int c\+Nb)
+\begin{DoxyCompactList}\small\item\em Initialise une partie avec une grille qui contient un nombre donné de couleurs, générées au hasard. \end{DoxyCompactList}\item 
+void \hyperlink{game_8c_a11118d44e944dbbfd45153619a3d9842}{game\+Print} (\hyperlink{structt__game}{game} $\ast$g)
+\begin{DoxyCompactList}\small\item\em Affiche la grille de jeu et d\textquotesingle{}autres informations. \end{DoxyCompactList}\item 
+void \hyperlink{game_8c_a189935d1d9e3b825791ddf76483de4a9}{game\+Free} (\hyperlink{structt__game}{game} $\ast$g)
+\begin{DoxyCompactList}\small\item\em Supprime la partie. \end{DoxyCompactList}\item 
+void \hyperlink{game_8c_a7636217618dfe710f503a86c8ccae3a7}{game\+Play\+Turn} (\hyperlink{structt__game}{game} $\ast$g)
+\begin{DoxyCompactList}\small\item\em Modifie la grille après que le joueur ait décidé d\textquotesingle{}une couleur. \end{DoxyCompactList}\item 
+void \hyperlink{game_8c_ac7cd8a7483961d1874ee746da58dd6dd}{game\+Play\+Turn\+S\+DL} (\hyperlink{structt__game}{game} $\ast$g, int new\+Color)
+\begin{DoxyCompactList}\small\item\em Modifie la grille en jouant la couleur new\+Color (utilisé par l\textquotesingle{}interface game\+\_\+board\+\_\+rendering. \end{DoxyCompactList}\item 
+bool \hyperlink{game_8c_a380255be34c051d613fd38a09935e0f0}{game\+Over} (\hyperlink{structt__game}{game} $\ast$g)
+\begin{DoxyCompactList}\small\item\em Teste si la partie est terminée (victoire du joueur) ou si elle continue. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{game_8c_aab77338d2fac882fd2aae7a5095d03d9}\label{game_8c_aab77338d2fac882fd2aae7a5095d03d9}} 
+\hyperlink{structt__game}{game} $\ast$ {\bfseries game\+Import} (char $\ast$save)
+\item 
+\mbox{\Hypertarget{game_8c_a966bf18caafe6c97ccdd7bf5c30467fa}\label{game_8c_a966bf18caafe6c97ccdd7bf5c30467fa}} 
+void {\bfseries game\+Export} (\hyperlink{structt__game}{game} $\ast$g)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Gestion du jeu pendant une partie. 
+
+\begin{DoxyAuthor}{Author}
+Last\+But\+Not\+Least 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Mars 2017 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{game_8c_a189935d1d9e3b825791ddf76483de4a9}\label{game_8c_a189935d1d9e3b825791ddf76483de4a9}} 
+\index{game.\+c@{game.\+c}!game\+Free@{game\+Free}}
+\index{game\+Free@{game\+Free}!game.\+c@{game.\+c}}
+\subsubsection{\texorpdfstring{game\+Free()}{gameFree()}}
+{\footnotesize\ttfamily game\+Free (\begin{DoxyParamCaption}\item[{\hyperlink{structt__game}{game} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+Supprime la partie. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: le jeu \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{game_8c_a189935d1d9e3b825791ddf76483de4a9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{game_8c_a887f37f53d21c0daee1b6ef659232c41}\label{game_8c_a887f37f53d21c0daee1b6ef659232c41}} 
+\index{game.\+c@{game.\+c}!game\+Init@{game\+Init}}
+\index{game\+Init@{game\+Init}!game.\+c@{game.\+c}}
+\subsubsection{\texorpdfstring{game\+Init()}{gameInit()}}
+{\footnotesize\ttfamily game\+Init (\begin{DoxyParamCaption}\item[{int}]{size,  }\item[{int}]{c\+Nb }\end{DoxyParamCaption})}
+
+
+
+Initialise une partie avec une grille qui contient un nombre donné de couleurs, générées au hasard. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & \+: taille de la grille à générer ie nombre de cases d\textquotesingle{}un coté \\
+\hline
+{\em c\+Nb} & \+: Nombre de couleurs différentes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Le jeu généré. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{game_8c_a887f37f53d21c0daee1b6ef659232c41_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{game_8c_a380255be34c051d613fd38a09935e0f0}\label{game_8c_a380255be34c051d613fd38a09935e0f0}} 
+\index{game.\+c@{game.\+c}!game\+Over@{game\+Over}}
+\index{game\+Over@{game\+Over}!game.\+c@{game.\+c}}
+\subsubsection{\texorpdfstring{game\+Over()}{gameOver()}}
+{\footnotesize\ttfamily game\+Over (\begin{DoxyParamCaption}\item[{\hyperlink{structt__game}{game} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+Teste si la partie est terminée (victoire du joueur) ou si elle continue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: le jeu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true si le jeu est terminé, false sinon 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{game_8c_a380255be34c051d613fd38a09935e0f0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{game_8c_a7636217618dfe710f503a86c8ccae3a7}\label{game_8c_a7636217618dfe710f503a86c8ccae3a7}} 
+\index{game.\+c@{game.\+c}!game\+Play\+Turn@{game\+Play\+Turn}}
+\index{game\+Play\+Turn@{game\+Play\+Turn}!game.\+c@{game.\+c}}
+\subsubsection{\texorpdfstring{game\+Play\+Turn()}{gamePlayTurn()}}
+{\footnotesize\ttfamily game\+Play\+Turn (\begin{DoxyParamCaption}\item[{\hyperlink{structt__game}{game} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+Modifie la grille après que le joueur ait décidé d\textquotesingle{}une couleur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: le jeu \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{game_8c_a7636217618dfe710f503a86c8ccae3a7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{game_8c_ac7cd8a7483961d1874ee746da58dd6dd}\label{game_8c_ac7cd8a7483961d1874ee746da58dd6dd}} 
+\index{game.\+c@{game.\+c}!game\+Play\+Turn\+S\+DL@{game\+Play\+Turn\+S\+DL}}
+\index{game\+Play\+Turn\+S\+DL@{game\+Play\+Turn\+S\+DL}!game.\+c@{game.\+c}}
+\subsubsection{\texorpdfstring{game\+Play\+Turn\+S\+D\+L()}{gamePlayTurnSDL()}}
+{\footnotesize\ttfamily game\+Play\+Turn\+S\+DL (\begin{DoxyParamCaption}\item[{\hyperlink{structt__game}{game} $\ast$}]{g,  }\item[{int}]{new\+Color }\end{DoxyParamCaption})}
+
+
+
+Modifie la grille en jouant la couleur new\+Color (utilisé par l\textquotesingle{}interface game\+\_\+board\+\_\+rendering. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: le jeu \\
+\hline
+{\em new\+Color} & \+: indice de la couleur a jouer \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{game_8c_ac7cd8a7483961d1874ee746da58dd6dd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{game_8c_a11118d44e944dbbfd45153619a3d9842}\label{game_8c_a11118d44e944dbbfd45153619a3d9842}} 
+\index{game.\+c@{game.\+c}!game\+Print@{game\+Print}}
+\index{game\+Print@{game\+Print}!game.\+c@{game.\+c}}
+\subsubsection{\texorpdfstring{game\+Print()}{gamePrint()}}
+{\footnotesize\ttfamily game\+Print (\begin{DoxyParamCaption}\item[{\hyperlink{structt__game}{game} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+Affiche la grille de jeu et d\textquotesingle{}autres informations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: le jeu \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{game_8c_a11118d44e944dbbfd45153619a3d9842_cgraph}
+\end{center}
+\end{figure}

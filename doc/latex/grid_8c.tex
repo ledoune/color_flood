@@ -1,0 +1,462 @@
+\hypertarget{grid_8c}{}\section{src/game/grid.c File Reference}
+\label{grid_8c}\index{src/game/grid.\+c@{src/game/grid.\+c}}
+
+
+Gestion de la grille de jeu.  
+
+
+{\ttfamily \#include \char`\"{}grid.\+h\char`\"{}}\newline
+Include dependency graph for grid.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{grid_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{grid_8c_aacc3ee1a7f283f8ef65cea31f4436a95}\label{grid_8c_aacc3ee1a7f283f8ef65cea31f4436a95}} 
+\#define {\bfseries M\+AX}(x,  y)~(((x) $>$ (y)) ? (x) \+: (y))
+\item 
+\mbox{\Hypertarget{grid_8c_a74e75242132eaabbc1c512488a135926}\label{grid_8c_a74e75242132eaabbc1c512488a135926}} 
+\#define {\bfseries M\+IN}(x,  y)~(((x) $<$ (y)) ? (x) \+: (y))
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structt__grid}{grid} $\ast$ \hyperlink{grid_8c_a8d8365e2dba2e31cc82d495f8542a393}{grid\+Init} (int size)
+\begin{DoxyCompactList}\small\item\em Initialise une grille d\textquotesingle{}une taille donnée. \end{DoxyCompactList}\item 
+void \hyperlink{grid_8c_a7b1a7fd47bc096b6430e02a4c2451e3f}{grid\+Init\+Colors} (\hyperlink{structt__grid}{grid} $\ast$g, \hyperlink{structt___r_g_b}{R\+GB} $\ast$c\+Tab, int c\+Nb)
+\begin{DoxyCompactList}\small\item\em Génère des couleurs au hasard dans une grille, associe à chaque case son label et obtient le label maximal. \end{DoxyCompactList}\item 
+\hyperlink{structt__grid}{grid} $\ast$ \hyperlink{grid_8c_a6e7e8c5d6e22b39ed1bde24783f13733}{grid\+Import} (F\+I\+LE $\ast$fp, int board\+\_\+size, \hyperlink{structt___r_g_b}{R\+GB} $\ast$c\+Tab, int c\+Nb)
+\begin{DoxyCompactList}\small\item\em Importe une grille à partir d\textquotesingle{}un fichier existant. \end{DoxyCompactList}\item 
+void \hyperlink{grid_8c_a2050f3ba54b5a9efa6d7fea841d98bae}{grid\+Export} (F\+I\+LE $\ast$fp, \hyperlink{structt__grid}{grid} $\ast$g, \hyperlink{structt___r_g_b}{R\+GB} $\ast$c\+Tab, int c\+Nb)
+\begin{DoxyCompactList}\small\item\em Exporte une grille dans un fichier. \end{DoxyCompactList}\item 
+\hyperlink{structt___r_g_b}{R\+GB} \hyperlink{grid_8c_a4d6f2609a0e5c49bd539a3f39f3208e5}{grid\+Get\+Color} (\hyperlink{structt__grid}{grid} $\ast$g, int x, int y)
+\begin{DoxyCompactList}\small\item\em Donne la couleur d\textquotesingle{}une case d\textquotesingle{}une grille. \end{DoxyCompactList}\item 
+void \hyperlink{grid_8c_a81c316eaecce336147a01cc72ae90801}{grid\+Set\+Color} (\hyperlink{structt__grid}{grid} $\ast$g, \hyperlink{structt___r_g_b}{R\+GB} new\+Color, int x, int y)
+\begin{DoxyCompactList}\small\item\em Affecte une couleur à une case d\textquotesingle{}une grille. \end{DoxyCompactList}\item 
+int \hyperlink{grid_8c_a42d5cd3f41ffe6bff0152df208a9d6b3}{grid\+Get\+Label} (\hyperlink{structt__grid}{grid} $\ast$g, int x, int y)
+\begin{DoxyCompactList}\small\item\em Obtient le label d\textquotesingle{}une case de la grille. \end{DoxyCompactList}\item 
+void \hyperlink{grid_8c_a9915684f28fcfbfab54b8cb8cc019057}{grid\+Set\+Label} (\hyperlink{structt__grid}{grid} $\ast$g, int new\+Label, int x, int y)
+\begin{DoxyCompactList}\small\item\em Associe un label à une case de la grille. \end{DoxyCompactList}\item 
+int \hyperlink{grid_8c_a75aecdb01dc9eb7a2a796e0548ff41f8}{grid\+Get\+Max\+Label} (\hyperlink{structt__grid}{grid} $\ast$g)
+\begin{DoxyCompactList}\small\item\em Obtient le plus grand label dans la grille. \end{DoxyCompactList}\item 
+bool \hyperlink{grid_8c_a3377767dd9dd32fdb2568ddc5377742c}{grid\+Is\+Uniform} (\hyperlink{structt__grid}{grid} $\ast$g)
+\begin{DoxyCompactList}\small\item\em Cherche si la grille est composée d\textquotesingle{}une seule couleur. \end{DoxyCompactList}\item 
+void \hyperlink{grid_8c_abb571f3c21105ce908b464844e342c17}{grid\+Flood\+Fill\+Label} (\hyperlink{structt__grid}{grid} $\ast$g, int x, int y)
+\begin{DoxyCompactList}\small\item\em Modifie le label de toutes les cases appartenant à la même composante connexe qu\textquotesingle{}une case visée, pour y associer le label de la case en question. \end{DoxyCompactList}\item 
+void \hyperlink{grid_8c_a064f6dee42ce72a7118778eb127691a9}{grid\+Flood\+Fill\+Color} (\hyperlink{structt__grid}{grid} $\ast$g, int x, int y)
+\begin{DoxyCompactList}\small\item\em Modifie la couleur de toutes les cases appartenant à la même composante connexe (ie même label) qu\textquotesingle{}une case visée, pour y associer la couleur de la case en question. \end{DoxyCompactList}\item 
+int \hyperlink{grid_8c_ae8a514f42a0cf2a0c7b13d5194489a71}{grid\+Label\+CC} (\hyperlink{structt__grid}{grid} $\ast$g)
+\begin{DoxyCompactList}\small\item\em Associe à chaque case un label (commun aux autres cases de la même composante connexe) et obtient le plus grand label. \end{DoxyCompactList}\item 
+void \hyperlink{grid_8c_ad1e0b52bf8891e9090312f71e9cd5601}{grid\+Print} (\hyperlink{structt__grid}{grid} $\ast$g, \hyperlink{structt___r_g_b}{R\+GB} $\ast$c\+Tab, int c\+Nb)
+\begin{DoxyCompactList}\small\item\em Affiche la grille \+: chaque case est représentée par le rang de sa couleur (comme élément du tableau de couleurs). \end{DoxyCompactList}\item 
+void \hyperlink{grid_8c_ab3139f8df42186aa02e725f5bbf2431a}{grid\+Print\+Labels} (\hyperlink{structt__grid}{grid} $\ast$g)
+\begin{DoxyCompactList}\small\item\em Affiche la grille \+: chaque case est représentée par son label. \end{DoxyCompactList}\item 
+void \hyperlink{grid_8c_a2d4a237e32e2d86b6b14506de1385c99}{grid\+Free} (\hyperlink{structt__grid}{grid} $\ast$g)
+\begin{DoxyCompactList}\small\item\em Supprime la grille. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Gestion de la grille de jeu. 
+
+\begin{DoxyAuthor}{Author}
+Last\+But\+Not\+Least 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Mars 2017 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{grid_8c_a2050f3ba54b5a9efa6d7fea841d98bae}\label{grid_8c_a2050f3ba54b5a9efa6d7fea841d98bae}} 
+\index{grid.\+c@{grid.\+c}!grid\+Export@{grid\+Export}}
+\index{grid\+Export@{grid\+Export}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Export()}{gridExport()}}
+{\footnotesize\ttfamily grid\+Export (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g,  }\item[{\hyperlink{structt___r_g_b}{R\+GB} $\ast$}]{c\+Tab,  }\item[{int}]{c\+Nb }\end{DoxyParamCaption})}
+
+
+
+Exporte une grille dans un fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fp} & \+: le fichier \\
+\hline
+{\em g} & \+: la grille \\
+\hline
+{\em c\+Tab} & \+: tableau contenant les différentes couleurs \\
+\hline
+{\em c\+Nb} & \+: nombre de couleurs différentes \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{grid_8c_a2050f3ba54b5a9efa6d7fea841d98bae_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grid_8c_a064f6dee42ce72a7118778eb127691a9}\label{grid_8c_a064f6dee42ce72a7118778eb127691a9}} 
+\index{grid.\+c@{grid.\+c}!grid\+Flood\+Fill\+Color@{grid\+Flood\+Fill\+Color}}
+\index{grid\+Flood\+Fill\+Color@{grid\+Flood\+Fill\+Color}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Flood\+Fill\+Color()}{gridFloodFillColor()}}
+{\footnotesize\ttfamily grid\+Flood\+Fill\+Color (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Modifie la couleur de toutes les cases appartenant à la même composante connexe (ie même label) qu\textquotesingle{}une case visée, pour y associer la couleur de la case en question. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille \\
+\hline
+{\em x} & \+: numéro de la ligne qui contient la case visée \\
+\hline
+{\em y} & \+: numéro de la colonne qui contient la case visée \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{grid_8c_a064f6dee42ce72a7118778eb127691a9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grid_8c_abb571f3c21105ce908b464844e342c17}\label{grid_8c_abb571f3c21105ce908b464844e342c17}} 
+\index{grid.\+c@{grid.\+c}!grid\+Flood\+Fill\+Label@{grid\+Flood\+Fill\+Label}}
+\index{grid\+Flood\+Fill\+Label@{grid\+Flood\+Fill\+Label}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Flood\+Fill\+Label()}{gridFloodFillLabel()}}
+{\footnotesize\ttfamily grid\+Flood\+Fill\+Label (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Modifie le label de toutes les cases appartenant à la même composante connexe qu\textquotesingle{}une case visée, pour y associer le label de la case en question. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille \\
+\hline
+{\em x} & \+: numéro de la ligne qui contient la case visée \\
+\hline
+{\em y} & \+: numéro de la colonne qui contient la case visée \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{grid_8c_abb571f3c21105ce908b464844e342c17_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grid_8c_a2d4a237e32e2d86b6b14506de1385c99}\label{grid_8c_a2d4a237e32e2d86b6b14506de1385c99}} 
+\index{grid.\+c@{grid.\+c}!grid\+Free@{grid\+Free}}
+\index{grid\+Free@{grid\+Free}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Free()}{gridFree()}}
+{\footnotesize\ttfamily grid\+Free (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+Supprime la grille. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille a supprimer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{grid_8c_a4d6f2609a0e5c49bd539a3f39f3208e5}\label{grid_8c_a4d6f2609a0e5c49bd539a3f39f3208e5}} 
+\index{grid.\+c@{grid.\+c}!grid\+Get\+Color@{grid\+Get\+Color}}
+\index{grid\+Get\+Color@{grid\+Get\+Color}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Get\+Color()}{gridGetColor()}}
+{\footnotesize\ttfamily grid\+Get\+Color (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Donne la couleur d\textquotesingle{}une case d\textquotesingle{}une grille. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille \\
+\hline
+{\em x} & \+: numéro de la colonne qui contient la case visée \\
+\hline
+{\em y} & \+: numéro de la ligne qui contient la case visée \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+La couleur de la case en R\+GB 
+\end{DoxyReturn}
+\mbox{\Hypertarget{grid_8c_a42d5cd3f41ffe6bff0152df208a9d6b3}\label{grid_8c_a42d5cd3f41ffe6bff0152df208a9d6b3}} 
+\index{grid.\+c@{grid.\+c}!grid\+Get\+Label@{grid\+Get\+Label}}
+\index{grid\+Get\+Label@{grid\+Get\+Label}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Get\+Label()}{gridGetLabel()}}
+{\footnotesize\ttfamily grid\+Get\+Label (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Obtient le label d\textquotesingle{}une case de la grille. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille \\
+\hline
+{\em x} & \+: numéro de la ligne qui contient la case visée \\
+\hline
+{\em y} & \+: numéro de la colonne qui contient la case visée \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Le numéro de la composante connexe de la case. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{grid_8c_a75aecdb01dc9eb7a2a796e0548ff41f8}\label{grid_8c_a75aecdb01dc9eb7a2a796e0548ff41f8}} 
+\index{grid.\+c@{grid.\+c}!grid\+Get\+Max\+Label@{grid\+Get\+Max\+Label}}
+\index{grid\+Get\+Max\+Label@{grid\+Get\+Max\+Label}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Get\+Max\+Label()}{gridGetMaxLabel()}}
+{\footnotesize\ttfamily grid\+Get\+Max\+Label (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+Obtient le plus grand label dans la grille. 
+
+Ce nombre n\textquotesingle{}est pas le nombre de labels dans la grille, et par conséquent pas le nombre de composantes connexes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Le label maximal. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{grid_8c_a6e7e8c5d6e22b39ed1bde24783f13733}\label{grid_8c_a6e7e8c5d6e22b39ed1bde24783f13733}} 
+\index{grid.\+c@{grid.\+c}!grid\+Import@{grid\+Import}}
+\index{grid\+Import@{grid\+Import}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Import()}{gridImport()}}
+{\footnotesize\ttfamily grid\+Import (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{int}]{board\+\_\+size,  }\item[{\hyperlink{structt___r_g_b}{R\+GB} $\ast$}]{c\+Tab,  }\item[{int}]{c\+Nb }\end{DoxyParamCaption})}
+
+
+
+Importe une grille à partir d\textquotesingle{}un fichier existant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fp} & \+: le fichier \\
+\hline
+{\em board\+\_\+size} & \+: taille de la grille \\
+\hline
+{\em c\+Tab} & \+: tableau contenant les différentes couleurs \\
+\hline
+{\em c\+Nb} & \+: nombre de couleurs différentes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+la grille générée 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{grid_8c_a6e7e8c5d6e22b39ed1bde24783f13733_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grid_8c_a8d8365e2dba2e31cc82d495f8542a393}\label{grid_8c_a8d8365e2dba2e31cc82d495f8542a393}} 
+\index{grid.\+c@{grid.\+c}!grid\+Init@{grid\+Init}}
+\index{grid\+Init@{grid\+Init}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Init()}{gridInit()}}
+{\footnotesize\ttfamily grid\+Init (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Initialise une grille d\textquotesingle{}une taille donnée. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & \+: taille de la grille à générer ie nombre de cases d\textquotesingle{}un coté \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+La grille générée. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{grid_8c_a7b1a7fd47bc096b6430e02a4c2451e3f}\label{grid_8c_a7b1a7fd47bc096b6430e02a4c2451e3f}} 
+\index{grid.\+c@{grid.\+c}!grid\+Init\+Colors@{grid\+Init\+Colors}}
+\index{grid\+Init\+Colors@{grid\+Init\+Colors}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Init\+Colors()}{gridInitColors()}}
+{\footnotesize\ttfamily grid\+Init\+Colors (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g,  }\item[{\hyperlink{structt___r_g_b}{R\+GB} $\ast$}]{c\+Tab,  }\item[{int}]{c\+Nb }\end{DoxyParamCaption})}
+
+
+
+Génère des couleurs au hasard dans une grille, associe à chaque case son label et obtient le label maximal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille dans laquelle il faut mettre des couleurs \\
+\hline
+{\em c\+Tab} & \+: tableau contenant les couleurs en code R\+GB, dans lequel on va piocher \\
+\hline
+{\em c\+Nb} & \+: nombre de couleurs du tableau \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{grid_8c_a7b1a7fd47bc096b6430e02a4c2451e3f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grid_8c_a3377767dd9dd32fdb2568ddc5377742c}\label{grid_8c_a3377767dd9dd32fdb2568ddc5377742c}} 
+\index{grid.\+c@{grid.\+c}!grid\+Is\+Uniform@{grid\+Is\+Uniform}}
+\index{grid\+Is\+Uniform@{grid\+Is\+Uniform}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Is\+Uniform()}{gridIsUniform()}}
+{\footnotesize\ttfamily grid\+Is\+Uniform (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+Cherche si la grille est composée d\textquotesingle{}une seule couleur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true si la grille est unicolore, false sinon. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{grid_8c_a3377767dd9dd32fdb2568ddc5377742c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grid_8c_ae8a514f42a0cf2a0c7b13d5194489a71}\label{grid_8c_ae8a514f42a0cf2a0c7b13d5194489a71}} 
+\index{grid.\+c@{grid.\+c}!grid\+Label\+CC@{grid\+Label\+CC}}
+\index{grid\+Label\+CC@{grid\+Label\+CC}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Label\+C\+C()}{gridLabelCC()}}
+{\footnotesize\ttfamily grid\+Label\+CC (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+Associe à chaque case un label (commun aux autres cases de la même composante connexe) et obtient le plus grand label. 
+
+Le label maximal n\textquotesingle{}est pas le nombre de labels dans la grille, et par conséquent pas le nombre de composantes connexes
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Le plus grand label 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{grid_8c_ae8a514f42a0cf2a0c7b13d5194489a71_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grid_8c_ad1e0b52bf8891e9090312f71e9cd5601}\label{grid_8c_ad1e0b52bf8891e9090312f71e9cd5601}} 
+\index{grid.\+c@{grid.\+c}!grid\+Print@{grid\+Print}}
+\index{grid\+Print@{grid\+Print}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Print()}{gridPrint()}}
+{\footnotesize\ttfamily grid\+Print (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g,  }\item[{\hyperlink{structt___r_g_b}{R\+GB} $\ast$}]{c\+Tab,  }\item[{int}]{c\+Nb }\end{DoxyParamCaption})}
+
+
+
+Affiche la grille \+: chaque case est représentée par le rang de sa couleur (comme élément du tableau de couleurs). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille \\
+\hline
+{\em c\+Tab} & \+: tableau contenant toutes les couleurs en code R\+GB \\
+\hline
+{\em c\+Nb} & \+: nombre de couleurs différentes contenues dans le tableau \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{grid_8c_ad1e0b52bf8891e9090312f71e9cd5601_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grid_8c_ab3139f8df42186aa02e725f5bbf2431a}\label{grid_8c_ab3139f8df42186aa02e725f5bbf2431a}} 
+\index{grid.\+c@{grid.\+c}!grid\+Print\+Labels@{grid\+Print\+Labels}}
+\index{grid\+Print\+Labels@{grid\+Print\+Labels}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Print\+Labels()}{gridPrintLabels()}}
+{\footnotesize\ttfamily grid\+Print\+Labels (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+Affiche la grille \+: chaque case est représentée par son label. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{grid_8c_ab3139f8df42186aa02e725f5bbf2431a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{grid_8c_a81c316eaecce336147a01cc72ae90801}\label{grid_8c_a81c316eaecce336147a01cc72ae90801}} 
+\index{grid.\+c@{grid.\+c}!grid\+Set\+Color@{grid\+Set\+Color}}
+\index{grid\+Set\+Color@{grid\+Set\+Color}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Set\+Color()}{gridSetColor()}}
+{\footnotesize\ttfamily grid\+Set\+Color (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g,  }\item[{\hyperlink{structt___r_g_b}{R\+GB}}]{new\+Color,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Affecte une couleur à une case d\textquotesingle{}une grille. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille \\
+\hline
+{\em new\+Color} & \+: la couleur à affecter en code R\+GB \\
+\hline
+{\em x} & \+: numéro de la ligne qui contient la case visée \\
+\hline
+{\em y} & \+: numéro de la colonne qui contient la case visée \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{grid_8c_a9915684f28fcfbfab54b8cb8cc019057}\label{grid_8c_a9915684f28fcfbfab54b8cb8cc019057}} 
+\index{grid.\+c@{grid.\+c}!grid\+Set\+Label@{grid\+Set\+Label}}
+\index{grid\+Set\+Label@{grid\+Set\+Label}!grid.\+c@{grid.\+c}}
+\subsubsection{\texorpdfstring{grid\+Set\+Label()}{gridSetLabel()}}
+{\footnotesize\ttfamily grid\+Set\+Label (\begin{DoxyParamCaption}\item[{\hyperlink{structt__grid}{grid} $\ast$}]{g,  }\item[{int}]{new\+Label,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Associe un label à une case de la grille. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & \+: la grille \\
+\hline
+{\em new\+Label} & \+: le label à associer \\
+\hline
+{\em x} & \+: numéro de la ligne qui contient la case visée \\
+\hline
+{\em y} & \+: numéro de la colonne qui contient la case visée \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Le numéro de la composante connexe de la case. 
+\end{DoxyReturn}

@@ -23,7 +23,10 @@ endef
 
 .PHONY: all checkdirs clean fclean
 
-all: checkdirs $(NAME)
+all: checkdirs $(NAME) doc
+
+doc:
+	doxygen
 
 $(NAME): $(OBJ)
 	$(CC) $^ -o $@ $(LIB)

@@ -1,0 +1,13 @@
+<map id="printBest" name="printBest">
+<area shape="rect" id="node2" href="$solver_8c.html#a61c82bfe85ab52391aff217dc4afc75c" title="Crée la matrice d&#39;adjacence associée à une partie. " alt="" coords="135,58,317,85"/>
+<area shape="rect" id="node3" href="$grid_8c.html#a75aecdb01dc9eb7a2a796e0548ff41f8" title="Obtient le plus grand label dans la grille. " alt="" coords="639,33,771,59"/>
+<area shape="rect" id="node6" href="$solver_8c.html#a958c071239440919668cf9df4f7fff13" title="Crée un tableau qui contient en i&#45;ème position la couleur du i&#45;ème label. " alt="" coords="365,134,591,161"/>
+<area shape="rect" id="node10" href="$solver_8c.html#acf0c40dd323ca07d656f475f672681f9" title="Retourne dans la stack best la meilleure solution. " alt="" coords="163,210,289,237"/>
+<area shape="rect" id="node12" href="$solver_8c.html#ad0d28f9e5b065430ab0cc7cb51c91c8d" title="Retourne dans la stack best la solution trouvée en coloriant le maximum de composantes connexes a cha..." alt="" coords="169,159,283,186"/>
+<area shape="rect" id="node4" href="$solver_8c.html#ac5c6b2c33d2447269800806135e1d829" title="Modifie la matrice d&#39;adjacence. " alt="" coords="405,83,551,110"/>
+<area shape="rect" id="node5" href="$grid_8c.html#a42d5cd3f41ffe6bff0152df208a9d6b3" title="Obtient le label d&#39;une case de la grille. " alt="" coords="652,83,757,110"/>
+<area shape="rect" id="node7" href="$rgb_8c.html#adafe178d2850e09e825de82e12f5c293" title="Cherche une couleur donnée dans un tableau de couleurs. " alt="" coords="649,134,760,161"/>
+<area shape="rect" id="node9" href="$grid_8c.html#a4d6f2609a0e5c49bd539a3f39f3208e5" title="Donne la couleur d&#39;une case d&#39;une grille. " alt="" coords="653,185,757,211"/>
+<area shape="rect" id="node8" href="$rgb_8c.html#a69f8efffc6c16e0b2379dbc3467d5364" title="Teste deux couleurs pour savoir si ce sont les mêmes. " alt="" coords="819,134,897,161"/>
+<area shape="rect" id="node11" href="$solver_8c.html#aaf2dd01fab598cfd3e1fc92ab727da35" title="Teste si la partie est finie. " alt="" coords="412,210,544,237"/>
+</map>

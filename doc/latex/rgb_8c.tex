@@ -1,0 +1,296 @@
+\hypertarget{rgb_8c}{}\section{src/game/rgb.c File Reference}
+\label{rgb_8c}\index{src/game/rgb.\+c@{src/game/rgb.\+c}}
+
+
+Gestion des couleurs.  
+
+
+{\ttfamily \#include \char`\"{}rgb.\+h\char`\"{}}\newline
+Include dependency graph for rgb.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rgb_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structt___r_g_b}{R\+GB} \hyperlink{rgb_8c_a7f6b53fea06197bd16137f5da5ea72cf}{rgb\+New} (int R, int G, int B)
+\begin{DoxyCompactList}\small\item\em Créer une couleur en utilisant les valeurs données de chaque composante. \end{DoxyCompactList}\item 
+\hyperlink{structt___r_g_b}{R\+GB} $\ast$ \hyperlink{rgb_8c_aea93cdd2750c8338054e51f6fdaa4ea0}{rgb\+Import} (F\+I\+LE $\ast$fp, int c\+Nb)
+\begin{DoxyCompactList}\small\item\em Importe des couleurs à partir d\textquotesingle{}un fichier. \end{DoxyCompactList}\item 
+void \hyperlink{rgb_8c_a670726318c048b47fe78b027bad809d7}{rgb\+Export} (F\+I\+LE $\ast$fp, \hyperlink{structt___r_g_b}{R\+GB} $\ast$c\+Tab, int c\+Nb)
+\begin{DoxyCompactList}\small\item\em Exporte un tableau de couleurs dans un fichier. \end{DoxyCompactList}\item 
+void \hyperlink{rgb_8c_a7df3eec610b0fa98a5ccb1cf6a9b00ef}{rgb\+Print} (\hyperlink{structt___r_g_b}{R\+GB} c)
+\begin{DoxyCompactList}\small\item\em Affiche les trois composantes de la couleur dans la console. \end{DoxyCompactList}\item 
+void \hyperlink{rgb_8c_af5947037ec0678e4bafc967877cfbb35}{rgb\+Array\+Print} (\hyperlink{structt___r_g_b}{R\+GB} $\ast$tab, int size)
+\begin{DoxyCompactList}\small\item\em Affiche un tableau contenant plusieurs couleurs dans la console. \end{DoxyCompactList}\item 
+\hyperlink{structt___r_g_b}{R\+GB} \hyperlink{rgb_8c_a0fe7dfd1dca25f3443104c9135510f17}{rgb\+Gen\+Rand} ()
+\begin{DoxyCompactList}\small\item\em Genère une couleur au hasard. \end{DoxyCompactList}\item 
+\hyperlink{structt___r_g_b}{R\+GB} $\ast$ \hyperlink{rgb_8c_a195f303207c06d72f092e34d20b6ef25}{rgb\+Array\+Gen\+Rand} (int nb)
+\begin{DoxyCompactList}\small\item\em Génère un tableau de couleurs au hasard. \end{DoxyCompactList}\item 
+bool \hyperlink{rgb_8c_a42e73f2513cb6a6fc188fc2c60eed9c9}{rgb\+Array\+Has\+Duplicate} (\hyperlink{structt___r_g_b}{R\+GB} $\ast$tab, int size)
+\begin{DoxyCompactList}\small\item\em Teste une tableau de couleurs pour savoir si deux couleurs sont les mêmes. \end{DoxyCompactList}\item 
+bool \hyperlink{rgb_8c_a69f8efffc6c16e0b2379dbc3467d5364}{rgb\+Equal} (\hyperlink{structt___r_g_b}{R\+GB} c1, \hyperlink{structt___r_g_b}{R\+GB} c2)
+\begin{DoxyCompactList}\small\item\em Teste deux couleurs pour savoir si ce sont les mêmes. \end{DoxyCompactList}\item 
+int \hyperlink{rgb_8c_adafe178d2850e09e825de82e12f5c293}{rgb\+Color\+To\+Int} (\hyperlink{structt___r_g_b}{R\+GB} c, \hyperlink{structt___r_g_b}{R\+GB} $\ast$tab, int size)
+\begin{DoxyCompactList}\small\item\em Cherche une couleur donnée dans un tableau de couleurs. \end{DoxyCompactList}\item 
+void \hyperlink{rgb_8c_a7310155c8ae06c73cfeff47165077e68}{rgb\+Array\+Free} (\hyperlink{structt___r_g_b}{R\+GB} $\ast$tab)
+\begin{DoxyCompactList}\small\item\em Supprime un tableau de couleurs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Gestion des couleurs. 
+
+\begin{DoxyAuthor}{Author}
+Last\+But\+Not\+Least 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+Mars 2017 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{rgb_8c_a7310155c8ae06c73cfeff47165077e68}\label{rgb_8c_a7310155c8ae06c73cfeff47165077e68}} 
+\index{rgb.\+c@{rgb.\+c}!rgb\+Array\+Free@{rgb\+Array\+Free}}
+\index{rgb\+Array\+Free@{rgb\+Array\+Free}!rgb.\+c@{rgb.\+c}}
+\subsubsection{\texorpdfstring{rgb\+Array\+Free()}{rgbArrayFree()}}
+{\footnotesize\ttfamily rgb\+Array\+Free (\begin{DoxyParamCaption}\item[{\hyperlink{structt___r_g_b}{R\+GB} $\ast$}]{tab }\end{DoxyParamCaption})}
+
+
+
+Supprime un tableau de couleurs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tab} & \+: le tableau à supprimer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{rgb_8c_a195f303207c06d72f092e34d20b6ef25}\label{rgb_8c_a195f303207c06d72f092e34d20b6ef25}} 
+\index{rgb.\+c@{rgb.\+c}!rgb\+Array\+Gen\+Rand@{rgb\+Array\+Gen\+Rand}}
+\index{rgb\+Array\+Gen\+Rand@{rgb\+Array\+Gen\+Rand}!rgb.\+c@{rgb.\+c}}
+\subsubsection{\texorpdfstring{rgb\+Array\+Gen\+Rand()}{rgbArrayGenRand()}}
+{\footnotesize\ttfamily rgb\+Array\+Gen\+Rand (\begin{DoxyParamCaption}\item[{int}]{nb }\end{DoxyParamCaption})}
+
+
+
+Génère un tableau de couleurs au hasard. 
+
+\+: la taille du tableau doit être non nulle. 
+\begin{DoxyParams}{Parameters}
+{\em nb} & \+: taille du tableau à générer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Le tableau de couleurs avec le code R\+GB. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{rgb_8c_a195f303207c06d72f092e34d20b6ef25_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rgb_8c_a42e73f2513cb6a6fc188fc2c60eed9c9}\label{rgb_8c_a42e73f2513cb6a6fc188fc2c60eed9c9}} 
+\index{rgb.\+c@{rgb.\+c}!rgb\+Array\+Has\+Duplicate@{rgb\+Array\+Has\+Duplicate}}
+\index{rgb\+Array\+Has\+Duplicate@{rgb\+Array\+Has\+Duplicate}!rgb.\+c@{rgb.\+c}}
+\subsubsection{\texorpdfstring{rgb\+Array\+Has\+Duplicate()}{rgbArrayHasDuplicate()}}
+{\footnotesize\ttfamily rgb\+Array\+Has\+Duplicate (\begin{DoxyParamCaption}\item[{\hyperlink{structt___r_g_b}{R\+GB} $\ast$}]{tab,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Teste une tableau de couleurs pour savoir si deux couleurs sont les mêmes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tab} & \+: le tableau de couleurs \\
+\hline
+{\em size} & \+: la taille du tableau \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true s\textquotesingle{}il y a deux couleurs identiques, false sinon. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{rgb_8c_a42e73f2513cb6a6fc188fc2c60eed9c9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rgb_8c_af5947037ec0678e4bafc967877cfbb35}\label{rgb_8c_af5947037ec0678e4bafc967877cfbb35}} 
+\index{rgb.\+c@{rgb.\+c}!rgb\+Array\+Print@{rgb\+Array\+Print}}
+\index{rgb\+Array\+Print@{rgb\+Array\+Print}!rgb.\+c@{rgb.\+c}}
+\subsubsection{\texorpdfstring{rgb\+Array\+Print()}{rgbArrayPrint()}}
+{\footnotesize\ttfamily rgb\+Array\+Print (\begin{DoxyParamCaption}\item[{\hyperlink{structt___r_g_b}{R\+GB} $\ast$}]{tab,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Affiche un tableau contenant plusieurs couleurs dans la console. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tab} & \+: le tableau qui contient les couleurs \\
+\hline
+{\em size} & \+: nombre de couleurs dans le tableau \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{rgb_8c_af5947037ec0678e4bafc967877cfbb35_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rgb_8c_adafe178d2850e09e825de82e12f5c293}\label{rgb_8c_adafe178d2850e09e825de82e12f5c293}} 
+\index{rgb.\+c@{rgb.\+c}!rgb\+Color\+To\+Int@{rgb\+Color\+To\+Int}}
+\index{rgb\+Color\+To\+Int@{rgb\+Color\+To\+Int}!rgb.\+c@{rgb.\+c}}
+\subsubsection{\texorpdfstring{rgb\+Color\+To\+Int()}{rgbColorToInt()}}
+{\footnotesize\ttfamily rgb\+Color\+To\+Int (\begin{DoxyParamCaption}\item[{\hyperlink{structt___r_g_b}{R\+GB}}]{c,  }\item[{\hyperlink{structt___r_g_b}{R\+GB} $\ast$}]{tab,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Cherche une couleur donnée dans un tableau de couleurs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: la couleur cherchée \\
+\hline
+{\em tab} & \+: le tableau de couleurs \\
+\hline
+{\em size} & \+: la taille du tableau \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Le rang de la couleur dans le tableau si elle a été trouvée ; -\/1 sinon. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{rgb_8c_adafe178d2850e09e825de82e12f5c293_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rgb_8c_a69f8efffc6c16e0b2379dbc3467d5364}\label{rgb_8c_a69f8efffc6c16e0b2379dbc3467d5364}} 
+\index{rgb.\+c@{rgb.\+c}!rgb\+Equal@{rgb\+Equal}}
+\index{rgb\+Equal@{rgb\+Equal}!rgb.\+c@{rgb.\+c}}
+\subsubsection{\texorpdfstring{rgb\+Equal()}{rgbEqual()}}
+{\footnotesize\ttfamily rgb\+Equal (\begin{DoxyParamCaption}\item[{\hyperlink{structt___r_g_b}{R\+GB}}]{c1,  }\item[{\hyperlink{structt___r_g_b}{R\+GB}}]{c2 }\end{DoxyParamCaption})}
+
+
+
+Teste deux couleurs pour savoir si ce sont les mêmes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c1} & \+: la première couleur \\
+\hline
+{\em c2} & \+: la deuxième couleur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true si les couleurs sont les mêmes, false sinon. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{rgb_8c_a670726318c048b47fe78b027bad809d7}\label{rgb_8c_a670726318c048b47fe78b027bad809d7}} 
+\index{rgb.\+c@{rgb.\+c}!rgb\+Export@{rgb\+Export}}
+\index{rgb\+Export@{rgb\+Export}!rgb.\+c@{rgb.\+c}}
+\subsubsection{\texorpdfstring{rgb\+Export()}{rgbExport()}}
+{\footnotesize\ttfamily rgb\+Export (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{\hyperlink{structt___r_g_b}{R\+GB} $\ast$}]{c\+Tab,  }\item[{int}]{c\+Nb }\end{DoxyParamCaption})}
+
+
+
+Exporte un tableau de couleurs dans un fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fp} & \+: le fichier \\
+\hline
+{\em c\+Tab} & \+: le tableau de couleurs \\
+\hline
+{\em c\+Nb} & \+: le nombre de couleurs différentes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{rgb_8c_a0fe7dfd1dca25f3443104c9135510f17}\label{rgb_8c_a0fe7dfd1dca25f3443104c9135510f17}} 
+\index{rgb.\+c@{rgb.\+c}!rgb\+Gen\+Rand@{rgb\+Gen\+Rand}}
+\index{rgb\+Gen\+Rand@{rgb\+Gen\+Rand}!rgb.\+c@{rgb.\+c}}
+\subsubsection{\texorpdfstring{rgb\+Gen\+Rand()}{rgbGenRand()}}
+{\footnotesize\ttfamily rgb\+Gen\+Rand (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Genère une couleur au hasard. 
+
+\begin{DoxyReturn}{Returns}
+La couleur générée avec le code R\+GB. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{rgb_8c_aea93cdd2750c8338054e51f6fdaa4ea0}\label{rgb_8c_aea93cdd2750c8338054e51f6fdaa4ea0}} 
+\index{rgb.\+c@{rgb.\+c}!rgb\+Import@{rgb\+Import}}
+\index{rgb\+Import@{rgb\+Import}!rgb.\+c@{rgb.\+c}}
+\subsubsection{\texorpdfstring{rgb\+Import()}{rgbImport()}}
+{\footnotesize\ttfamily rgb\+Import (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp,  }\item[{int}]{c\+Nb }\end{DoxyParamCaption})}
+
+
+
+Importe des couleurs à partir d\textquotesingle{}un fichier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fp} & \+: le fichier \\
+\hline
+{\em c\+Nb} & \+: nombre de couleurs différentes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+un tableau contenant les couleurs importées 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{rgb_8c_aea93cdd2750c8338054e51f6fdaa4ea0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rgb_8c_a7f6b53fea06197bd16137f5da5ea72cf}\label{rgb_8c_a7f6b53fea06197bd16137f5da5ea72cf}} 
+\index{rgb.\+c@{rgb.\+c}!rgb\+New@{rgb\+New}}
+\index{rgb\+New@{rgb\+New}!rgb.\+c@{rgb.\+c}}
+\subsubsection{\texorpdfstring{rgb\+New()}{rgbNew()}}
+{\footnotesize\ttfamily rgb\+New (\begin{DoxyParamCaption}\item[{int}]{R,  }\item[{int}]{G,  }\item[{int}]{B }\end{DoxyParamCaption})}
+
+
+
+Créer une couleur en utilisant les valeurs données de chaque composante. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em R} & \+: composante rouge (max 256) \\
+\hline
+{\em G} & \+: composante verte (max 256) \\
+\hline
+{\em B} & \+: composante bleue (max 256) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: la couleur (en code R\+GB) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{rgb_8c_a7df3eec610b0fa98a5ccb1cf6a9b00ef}\label{rgb_8c_a7df3eec610b0fa98a5ccb1cf6a9b00ef}} 
+\index{rgb.\+c@{rgb.\+c}!rgb\+Print@{rgb\+Print}}
+\index{rgb\+Print@{rgb\+Print}!rgb.\+c@{rgb.\+c}}
+\subsubsection{\texorpdfstring{rgb\+Print()}{rgbPrint()}}
+{\footnotesize\ttfamily rgb\+Print (\begin{DoxyParamCaption}\item[{\hyperlink{structt___r_g_b}{R\+GB}}]{c }\end{DoxyParamCaption})}
+
+
+
+Affiche les trois composantes de la couleur dans la console. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: une couleur \\
+\hline
+\end{DoxyParams}

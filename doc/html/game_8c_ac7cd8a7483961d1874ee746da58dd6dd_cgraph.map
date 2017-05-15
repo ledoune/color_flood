@@ -1,0 +1,10 @@
+<map id="gamePlayTurnSDL" name="gamePlayTurnSDL">
+<area shape="rect" id="node2" href="$rgb_8c.html#a69f8efffc6c16e0b2379dbc3467d5364" title="Teste deux couleurs pour savoir si ce sont les mêmes. " alt="" coords="392,56,471,83"/>
+<area shape="rect" id="node3" href="$grid_8c.html#a81c316eaecce336147a01cc72ae90801" title="Affecte une couleur à une case d&#39;une grille. " alt="" coords="380,5,483,32"/>
+<area shape="rect" id="node4" href="$grid_8c.html#a064f6dee42ce72a7118778eb127691a9" title="Modifie la couleur de toutes les cases appartenant à la même composante connexe (ie même label) qu&#39;un..." alt="" coords="195,107,330,133"/>
+<area shape="rect" id="node7" href="$grid_8c.html#a9915684f28fcfbfab54b8cb8cc019057" title="Associe un label à une case de la grille. " alt="" coords="380,208,483,235"/>
+<area shape="rect" id="node8" href="$grid_8c.html#a75aecdb01dc9eb7a2a796e0548ff41f8" title="Obtient le plus grand label dans la grille. " alt="" coords="197,259,329,285"/>
+<area shape="rect" id="node9" href="$grid_8c.html#abb571f3c21105ce908b464844e342c17" title="Modifie le label de toutes les cases appartenant à la même composante connexe qu&#39;une case visée..." alt="" coords="195,157,331,184"/>
+<area shape="rect" id="node5" href="$grid_8c.html#a4d6f2609a0e5c49bd539a3f39f3208e5" title="Donne la couleur d&#39;une case d&#39;une grille. " alt="" coords="379,157,483,184"/>
+<area shape="rect" id="node6" href="$grid_8c.html#a42d5cd3f41ffe6bff0152df208a9d6b3" title="Obtient le label d&#39;une case de la grille. " alt="" coords="379,107,484,133"/>
+</map>

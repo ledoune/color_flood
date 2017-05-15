@@ -1,0 +1,4 @@
+<map id="t_game" name="t_game">
+<area shape="rect" id="node2" href="$structt__grid.html" title="Structure d&#39;une grille. " alt="" coords="93,96,151,123"/>
+<area shape="rect" id="node3" href="$structt___r_g_b.html" title="Structure d&#39;une couleur en utilisant le code rgb. " alt="" coords="5,5,68,32"/>
+</map>

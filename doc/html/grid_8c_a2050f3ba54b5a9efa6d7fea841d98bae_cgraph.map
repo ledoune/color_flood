@@ -1,0 +1,5 @@
+<map id="gridExport" name="gridExport">
+<area shape="rect" id="node2" href="$rgb_8c.html#adafe178d2850e09e825de82e12f5c293" title="Cherche une couleur donnée dans un tableau de couleurs. " alt="" coords="143,5,253,32"/>
+<area shape="rect" id="node4" href="$grid_8c.html#a4d6f2609a0e5c49bd539a3f39f3208e5" title="Donne la couleur d&#39;une case d&#39;une grille. " alt="" coords="146,56,250,83"/>
+<area shape="rect" id="node3" href="$rgb_8c.html#a69f8efffc6c16e0b2379dbc3467d5364" title="Teste deux couleurs pour savoir si ce sont les mêmes. " alt="" coords="301,5,380,32"/>
+</map>
