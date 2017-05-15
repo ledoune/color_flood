@@ -8,6 +8,7 @@ sdlBoard* boardInit(game *g, SDL_Window **gWindow, SDL_Renderer **gRenderer) {
 	newBoard->gWindow = gWindow;
 	newBoard->gRenderer = gRenderer;
 	newBoard->g = g;
+	newBoard->maxTurns = printBest(g);
 	newBoard->boardButtons = boardInitButtons(newBoard);
 	newBoard->bannerFont = TTF_OpenFont("./src/sdl/fonts/CaviarDreams.ttf", 20);
 	newBoard->gs = GAMESTATE_PLAYING;
@@ -102,14 +103,17 @@ void boardInitBanner(sdlBoard *b) {
 	b->bannerTurnCounter = LTexture_New();
 	LTexture_Init(b->bannerTurnCounter, b->gWindow, b->gRenderer);
 	LTexture_SetFont(b->bannerTurnCounter, b->bannerFont);
-	LTexture_LoadFromRenderedText(b->bannerTurnCounter,"Turn 0", c);
+	char *tmp = (char *)calloc(100, sizeof(char));
+	sprintf(tmp, "Turn 0/%d", b->maxTurns);
+	LTexture_LoadFromRenderedText(b->bannerTurnCounter,tmp, c);
+	free(tmp);
 
 }
 
 void boardUpdateTurn(sdlBoard *b) {
 	/* should be enough space for a loooot of turns */
 	char str[100];
-	sprintf(str, "Turn %d", b->g->turnCount);
+	sprintf(str, "Turn %d/%d", b->g->turnCount, b->maxTurns);
 
 	LTexture_Delete(b->bannerTurnCounter);
 
@@ -231,7 +235,12 @@ void boardGameOverRoutine(sdlBoard *b, SDL_Event *e, GameState *gs) {
 	LTexture_SetFont(gameOverMessage, b->bannerFont);
 	SDL_Color c = {0x00, 0x00, 0x00, 0xFF};
 	char str[100];
-	sprintf(str,"Congratulation you have finished in %d turns!", b->g->turnCount);
+	if(b->g->turnCount > b->maxTurns) {
+		sprintf(str,"Sorry you lost, you had only %d turns!", b->maxTurns);
+	}
+	else {
+		sprintf(str,"Congratulation you have finished in %d turns!", b->g->turnCount);
+	}
 	LTexture_LoadFromRenderedText(gameOverMessage, str, c);
 
 	LTexture *continueMessage = LTexture_New();
@@ -303,7 +312,7 @@ GameState boardRoutine(game *g, SDL_Window **gWindow, SDL_Renderer **gRenderer, 
 
 		SDL_RenderPresent(*gRenderer);
 
-		if(gameOver(b->g)) {
+		if(gameOver(b->g) || b->g->turnCount > b->maxTurns) {
 			gs = GAMESTATE_GAMEOVER;
 			boardGameOverRoutine(b, e, &gs);
 		}
