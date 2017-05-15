@@ -5,6 +5,7 @@
 #include "sdl_utils.h"
 #include "game_states.h"
 #include "../game/game.h"
+#include "../solver/solver.h"
 
 #define SIDES_MARGINS 30
 #define BUTTON_MARGIN 10
@@ -14,6 +15,7 @@ typedef struct sdlBoard {
 	SDL_Renderer **gRenderer;
 	TTF_Font *bannerFont;
 	game *g;
+	int maxTurns;
 	LTexture *bannerTitle;
 	LTexture *bannerTurnCounter;
 	LButton *bannerButtons[2];

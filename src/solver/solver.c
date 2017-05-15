@@ -1,50 +1,33 @@
-#include <stdlib.h>
-#include "stack.h"
-#include "../game/game.h"
+#include "solver.h"
 
-void solveBruteForce(const int *adjMatrix, const int *lblToColor, int *playerLabels, const int maxLabel, const int colorRange, int *maxDepth, int currDepth, stack solution, stack *best, int playedColor);
-int* solverComputeAdjMatrix(game *g);
-int* solverComputeLblToColorArray(game *g);
-void solveHeuristic(const int *adjMatrix, const int *lblToColor, int *playerLabels, const int maxLabel, const int colorRange, int *maxDepth, int currDepth, stack solution, stack *best, int playedColor);
-
-int main(void) {
-
-	srand(time(NULL));
-
-	game *g = gameInit(6, 4);
-
+int printBest(game *g) {
 	int *adjMatrix = solverComputeAdjMatrix(g);
 	int *lblToColor = solverComputeLblToColorArray(g);
 	int maxDepth = -1;
 	stack solution = stackNew();
-	stack solution2 = stackNew();
 	stack best = stackNew();
-	stack best2 = stackNew();
 	int *playerLabels = (int *)calloc(gridGetMaxLabel(g->grid), sizeof(int));
 	playerLabels[0] = 1;
 
-	solveBruteForce(adjMatrix, lblToColor, playerLabels, gridGetMaxLabel(g->grid), g->cNb, &maxDepth, 0, solution, &best, -1);
-	maxDepth = -1;
-	playerLabels = (int *)calloc(gridGetMaxLabel(g->grid), sizeof(int));
-	playerLabels[0] = 1;
-	solveHeuristic(adjMatrix, lblToColor, playerLabels, gridGetMaxLabel(g->grid), g->cNb, &maxDepth, 0, solution2, &best2, -1);
+	if(g->size < 9) {
+		solveBruteForce(adjMatrix, lblToColor, playerLabels, gridGetMaxLabel(g->grid), g->cNb, &maxDepth, 0, solution, &best, -1);
+		printf("Solution by bruteforce: ");
+	}
+	else {
+		solveHeuristic(adjMatrix, lblToColor, playerLabels, gridGetMaxLabel(g->grid), g->cNb, &maxDepth, 0, solution, &best, -1);
+		printf("Solution by heuristic: ");
+	}
 
-	printf("brute: ");
 	stackPrint(best);
-	printf("heuri: ");
-	stackPrint(best2);
+	int solutionSize = stackSize(best);
 
 	stackFree(&solution);
 	stackFree(&best);
-	stackFree(&solution2);
-	stackFree(&best2);
 
 	free(adjMatrix);
 	free(lblToColor);
 
-	gameFree(g);
-
-	return 0;
+	return solutionSize;
 }
 
 void processNeighbours(game *g, int x, int y, int *adjMatrix) {
