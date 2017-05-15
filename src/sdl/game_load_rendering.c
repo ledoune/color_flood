@@ -260,7 +260,14 @@ GameState previewRoutine(game **g, SDL_Window **gWindow, SDL_Renderer **gRendere
 			}
 		}
 
-		if(p->gs == GAMESTATE_DELETE) p->gs = GAMESTATE_LOAD;
+		if(p->gs == GAMESTATE_DELETE) {
+			/*
+			remove(p->savesNames[p->computeSave]);
+			p->currentSave += 1;
+			*/
+			p->gs = GAMESTATE_LOAD;
+		}
+
 		if(gs != GAMESTATE_QUIT) gs = p->gs;
 
 		computeCurrentSaveNumber(p);
