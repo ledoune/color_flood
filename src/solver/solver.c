@@ -2,32 +2,42 @@
 #include "stack.h"
 #include "../game/game.h"
 
-void solve(const int *adjMatrix, const int *lblToColor, int *playerLabels, const int maxLabel, const int colorRange, int *maxDepth, int currDepth, stack solution, stack *best, int playedColor);
+void solveBruteForce(const int *adjMatrix, const int *lblToColor, int *playerLabels, const int maxLabel, const int colorRange, int *maxDepth, int currDepth, stack solution, stack *best, int playedColor);
 int* solverComputeAdjMatrix(game *g);
 int* solverComputeLblToColorArray(game *g);
+void solveHeuristic(const int *adjMatrix, const int *lblToColor, int *playerLabels, const int maxLabel, const int colorRange, int *maxDepth, int currDepth, stack solution, stack *best, int playedColor);
 
 int main(void) {
 
 	srand(time(NULL));
 
-	game *g = gameInit(10, 6);
-	gamePrint(g);
+	game *g = gameInit(8, 4);
 
 	int *adjMatrix = solverComputeAdjMatrix(g);
 	int *lblToColor = solverComputeLblToColorArray(g);
 	int maxDepth = -1;
 	stack solution = stackNew();
+	stack solution2 = stackNew();
 	stack best = stackNew();
+	stack best2 = stackNew();
 	int *playerLabels = (int *)calloc(gridGetMaxLabel(g->grid), sizeof(int));
 	playerLabels[0] = 1;
 
-	solve(adjMatrix, lblToColor, playerLabels, gridGetMaxLabel(g->grid), g->cNb, &maxDepth, 0, solution, &best, -1);
+	solveBruteForce(adjMatrix, lblToColor, playerLabels, gridGetMaxLabel(g->grid), g->cNb, &maxDepth, 0, solution, &best, -1);
+	maxDepth = -1;
+	playerLabels = (int *)calloc(gridGetMaxLabel(g->grid), sizeof(int));
+	playerLabels[0] = 1;
+	solveHeuristic(adjMatrix, lblToColor, playerLabels, gridGetMaxLabel(g->grid), g->cNb, &maxDepth, 0, solution2, &best2, -1);
 
-	printf("best: ");
+	printf("brute: ");
 	stackPrint(best);
+	printf("heuri: ");
+	stackPrint(best2);
 
 	stackFree(&solution);
 	stackFree(&best);
+	stackFree(&solution2);
+	stackFree(&best2);
 
 	free(adjMatrix);
 	free(lblToColor);
@@ -96,7 +106,7 @@ bool solverGameOver(const int *playerLabels, const int maxLabel) {
 	return i == -1;
 }
 
-void solve(const int *adjMatrix, const int *lblToColor, int *playerLabels, const int maxLabel, const int colorRange, int *maxDepth, int currDepth, stack solution, stack *best, int playedColor) {
+void solveBruteForce(const int *adjMatrix, const int *lblToColor, int *playerLabels, const int maxLabel, const int colorRange, int *maxDepth, int currDepth, stack solution, stack *best, int playedColor) {
 	int *nextColors = (int *)calloc(colorRange, sizeof(int));
 	int markedColors = 0, neighbourColor;
 	/* play the turn and mark the next colors */
@@ -155,8 +165,6 @@ void solve(const int *adjMatrix, const int *lblToColor, int *playerLabels, const
 		stackFree(best);
 		/* NB stackCopy reverse the stack, so the first turns are on top */
 		*best = stackCopy(solution);
-		printf("best: ");
-		stackPrint(*best);
 	}
 	else if((currDepth < *maxDepth - 1 && *maxDepth > colorRange) || *maxDepth == -1) {
 	/************** ELSE KEEP GOING FOR EVERY MARKED COLOR ********************/
@@ -169,9 +177,88 @@ void solve(const int *adjMatrix, const int *lblToColor, int *playerLabels, const
 			if(nextColors[j] == 1) {
 				newPlayerLabels = (int *)calloc(maxLabel, sizeof(int));
 				memcpy(newPlayerLabels, playerLabels, maxLabel * sizeof(int));
-				solve(adjMatrix, lblToColor, newPlayerLabels, maxLabel, colorRange, maxDepth, currDepth + 1, solution, best, j);
+				solveBruteForce(adjMatrix, lblToColor, newPlayerLabels, maxLabel, colorRange, maxDepth, currDepth + 1, solution, best, j);
 			}
 		}
+	}
+	/************** POP PLAYED COLOR & FREE TEMP ARRAYS ********************/
+	if(currDepth > 0) stackPop(&solution);
+	free(nextColors);
+	free(playerLabels);
+}
+
+void solveHeuristic(const int *adjMatrix, const int *lblToColor, int *playerLabels, const int maxLabel, const int colorRange, int *maxDepth, int currDepth, stack solution, stack *best, int playedColor) {
+	int *nextColors = (int *)calloc(colorRange, sizeof(int));
+	int *countedLabels = (int *)calloc(maxLabel, sizeof(int));
+	int neighbourColor;
+	/* play the turn and mark the next colors */
+	int i, j, k;
+
+	/************** PLAY THE COLOR && TAG NEIGHBOUR COLORS ********************/
+	if(playedColor == -1) {
+		/* if first turn, no color played, you want to tag colors next to lbl 1 */
+		for(k=0; k<maxLabel; k++) {
+			neighbourColor = lblToColor[k];
+			if(adjMatrix[k] == 1 && playerLabels[k] == 0) {
+				nextColors[neighbourColor] += 1;
+			}
+		}
+	}
+	else {
+		for(i=0; i<maxLabel; i++) {
+			/* if label connected to topright */
+			if(playerLabels[i] == 1) {
+				for(j=0; j<maxLabel; j++) {
+					if(adjMatrix[i*maxLabel + j] == 1 && playerLabels[j] == 0) {
+						/* if neighbour and right color and not already connected */
+						if(lblToColor[j] == playedColor) {
+							playerLabels[j] = 1;
+							/* mark neighbour colors of the new label */
+							for(k=0; k<maxLabel; k++) {
+								neighbourColor = lblToColor[k];
+								if(adjMatrix[j*maxLabel + k] == 1 && playerLabels[k] == 0 && countedLabels[k] == 0 && lblToColor[k] != playedColor) {
+									nextColors[neighbourColor] += 1;
+									countedLabels[k] = 1;
+								}
+							}
+						}
+						else {
+							if(countedLabels[j] == 0) {
+								neighbourColor = lblToColor[j];
+								nextColors[neighbourColor] += 1;
+								countedLabels[j] = 1;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/************** ADD PLAYED COLOR TO CURRENT SOLUTION ********************/
+	if(playedColor != -1) stackPush(&solution, playedColor);
+
+	/************** IF GAME OVER SAVE SOLUTION IN BEST ********************/
+	if(solverGameOver(playerLabels, maxLabel)) {
+		*maxDepth = stackSize(solution);
+		stackFree(best);
+		/* NB stackCopy reverse the stack, so the first turns are on top */
+		*best = stackCopy(solution);
+	}
+	else if((currDepth < *maxDepth - 1 && *maxDepth > colorRange) || *maxDepth == -1) {
+	/************** ELSE KEEP GOING FOR EVERY MARKED COLOR ********************/
+		int *newPlayerLabels = NULL;
+		int maxNeighbourLabel = 0;
+
+		for(i=1; i<colorRange; i++) {
+			if(nextColors[i] > nextColors[maxNeighbourLabel]) {
+				maxNeighbourLabel = i;
+			}
+		}
+		newPlayerLabels = (int *)calloc(maxLabel, sizeof(int));
+		memcpy(newPlayerLabels, playerLabels, maxLabel * sizeof(int));
+		solveHeuristic(adjMatrix, lblToColor, newPlayerLabels, maxLabel, colorRange, maxDepth, currDepth + 1, solution, best, maxNeighbourLabel);
+
 	}
 	/************** POP PLAYED COLOR & FREE TEMP ARRAYS ********************/
 	if(currDepth > 0) stackPop(&solution);
