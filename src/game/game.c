@@ -73,7 +73,7 @@ bool gameOver(game *g) {
 game *gameImport(char *save) {
 
 	char buffer[256];
-	int size, colors;
+	int size, colors, turnCount;
 
 	sprintf(buffer, "%s/%s",SAVES_FOLDER, save);
 	
@@ -92,7 +92,7 @@ game *gameImport(char *save) {
 	 */
 
 	fgets(buffer, sizeof(buffer), fp);
-	if(sscanf(buffer, "%d %d", &size, &colors) != 2) {
+	if(sscanf(buffer, "%d %d %d", &size, &colors, &turnCount) != 3) {
 		printf("Not a valid save file\n");
 		exit(1);
 	}
@@ -102,7 +102,7 @@ game *gameImport(char *save) {
 	if(!g) exit(1);
 	g->size = size;
 	g->cNb = colors;
-	g->turnCount = 0;
+	g->turnCount = turnCount;
 	g->cTab = rgbImport(fp, colors);
 	g->grid = gridImport(fp, size, g->cTab, colors);
 	g->cPlayer = gridGetColor(g->grid, 0, 0);
@@ -120,7 +120,7 @@ void gameExport(game *g) {
 	FILE *fp = fopen(name,"ab+");
 	if(fp == NULL) exit(1);
 
-	fprintf(fp, "%d %d\n", g->size, g->cNb);
+	fprintf(fp, "%d %d %d\n", g->size, g->cNb, g->turnCount);
 
 	rgbExport(fp, g->cTab, g->cNb);
 	gridExport(fp, g->grid, g->cTab, g->cNb);

@@ -37,6 +37,6 @@ clean:
 	$(RM) $(BUILD_DIR)
 
 fclean: clean
-	$(RM) $(NAME) solver
+	$(RM) $(NAME)
 
 $(foreach bdir,$(BUILD_DIR),$(eval $(call make-goal, $(bdir))))
