@@ -11,7 +11,7 @@ int main(void) {
 
 	srand(time(NULL));
 
-	game *g = gameInit(8, 4);
+	game *g = gameInit(6, 4);
 
 	int *adjMatrix = solverComputeAdjMatrix(g);
 	int *lblToColor = solverComputeLblToColorArray(g);
@@ -136,20 +136,29 @@ void solveBruteForce(const int *adjMatrix, const int *lblToColor, int *playerLab
 			/* if label connected to topright */
 			if(playerLabels[i] == 1) {
 				for(j=0; j<maxLabel; j++) {
-					
-					if(adjMatrix[i*maxLabel + j] == 1 && lblToColor[j] == playedColor && playerLabels[j] == 0) {
-						/* if neighbour and (right color or first call) and not already connected */
-						playerLabels[j] = 1;
-						/* mark neighbour colors of the new label */
-						for(k=0; k<maxLabel; k++) {
-							if(markedColors == colorRange - 1) break;
-							neighbourColor = lblToColor[k];
-							if(adjMatrix[j*maxLabel + k] == 1 && neighbourColor != playedColor && nextColors[neighbourColor] == 0 && playerLabels[k] == 0) {
+					if(adjMatrix[i*maxLabel + j] == 1 && playerLabels[j] == 0) {
+						/* if neighbour and not already connected */
+						if(lblToColor[j] == playedColor) {
+							playerLabels[j] = 1;
+							/* mark neighbour colors of the new label */
+							for(k=0; k<maxLabel; k++) {
+								if(markedColors == colorRange - 1) break;
+								neighbourColor = lblToColor[k];
+								if(adjMatrix[j*maxLabel + k] == 1 && nextColors[neighbourColor] == 0 && playerLabels[k] == 0 && lblToColor[k] !=playedColor) {
+									nextColors[neighbourColor] = 1;
+									markedColors++;
+								}
+							}
+
+						}
+						else {
+							if(nextColors[lblToColor[j]] == 0) {
+								neighbourColor = lblToColor[j];
 								nextColors[neighbourColor] = 1;
 								markedColors++;
 							}
 						}
-						
+												
 					}
 				}
 			}
@@ -262,6 +271,7 @@ void solveHeuristic(const int *adjMatrix, const int *lblToColor, int *playerLabe
 	}
 	/************** POP PLAYED COLOR & FREE TEMP ARRAYS ********************/
 	if(currDepth > 0) stackPop(&solution);
+	free(countedLabels);
 	free(nextColors);
 	free(playerLabels);
 }
