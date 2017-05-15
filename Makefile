@@ -5,7 +5,7 @@ RM		= rm -rf
 CFLAGS	= -Wall -Wextra -ansi -pedantic -std=c11 -O3 -g
 LIB		= -lSDL2 -lSDL2_image -lSDL2_ttf -lm
 
-MODULES 	= game sdl 
+MODULES 	= game sdl solver
 SRC_DIR 	= $(addprefix src/,$(MODULES))
 BUILD_DIR 	= $(addprefix build/,$(MODULES))
 
@@ -23,13 +23,10 @@ endef
 
 .PHONY: all checkdirs clean fclean
 
-all: checkdirs $(NAME) solver
+all: checkdirs $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $^ -o $@ $(LIB)
-
-solver : src/solver/solver.c src/solver/stack.c src/game/game.c src/game/grid.c src/game/rgb.c
-	$(CC) $(CFLAGS) $^ -o $@
 
 checkdirs: $(BUILD_DIR)
 

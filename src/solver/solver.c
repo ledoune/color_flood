@@ -9,7 +9,7 @@ int printBest(game *g) {
 	int *playerLabels = (int *)calloc(gridGetMaxLabel(g->grid), sizeof(int));
 	playerLabels[0] = 1;
 
-	if(g->size < 9) {
+	if(g->size < 7) {
 		solveBruteForce(adjMatrix, lblToColor, playerLabels, gridGetMaxLabel(g->grid), g->cNb, &maxDepth, 0, solution, &best, -1);
 		printf("Solution by bruteforce: ");
 	}
